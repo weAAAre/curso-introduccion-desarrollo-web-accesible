@@ -60,10 +60,9 @@ html.library-login-scroll-padding {
 
 .library-login__brand {
   margin: 0;
-  font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
+  font-family: var(--font-body);
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .library-login__nav {
@@ -85,11 +84,15 @@ html.library-login-scroll-padding {
   background: var(--color-surface);
 }
 
-.library-login h1,
-.library-login h2 {
+.library-login h1 {
   font-family: var(--font-display);
   font-variation-settings: var(--font-display-settings);
   font-weight: 500;
+}
+
+.library-login h2 {
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
 .library-login h1 {

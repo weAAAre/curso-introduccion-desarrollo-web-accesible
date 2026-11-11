@@ -39,10 +39,9 @@
 
 .cinema-booking__brand {
   margin: 0;
-  font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
+  font-family: var(--font-body);
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .cinema-booking__nav {
@@ -62,11 +61,15 @@
   color: var(--color-rule-soft);
 }
 
-.cinema-booking h1,
-.cinema-booking h2 {
+.cinema-booking h1 {
   font-family: var(--font-display);
   font-variation-settings: var(--font-display-settings);
   font-weight: 500;
+}
+
+.cinema-booking h2 {
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
 .cinema-booking h1 {

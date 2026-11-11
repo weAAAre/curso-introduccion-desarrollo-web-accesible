@@ -44,11 +44,10 @@
 
 .recipe-page__brand {
   margin: 0;
-  font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
+  font-family: var(--font-body);
   font-size: 1.5rem;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .recipe-page__nav {
@@ -74,11 +73,15 @@
   font-weight: 700;
 }
 
-.recipe-page__title,
-.recipe-page__heading {
+.recipe-page__title {
   font-family: var(--font-display);
   font-variation-settings: var(--font-display-settings);
   font-weight: 500;
+}
+
+.recipe-page__heading {
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
 .recipe-page__title {

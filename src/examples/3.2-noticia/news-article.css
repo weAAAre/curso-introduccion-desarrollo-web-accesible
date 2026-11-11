@@ -39,10 +39,9 @@
 
 .news-article__brand {
   margin: 0;
-  font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
+  font-family: var(--font-body);
   font-size: 1.75rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .news-article__nav {
@@ -79,11 +78,15 @@
   font-weight: 700;
 }
 
-.news-article h1,
-.news-article h2 {
+.news-article h1 {
   font-family: var(--font-display);
   font-variation-settings: var(--font-display-settings);
   font-weight: 500;
+}
+
+.news-article h2 {
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
 .news-article h1 {

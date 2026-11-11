@@ -39,10 +39,9 @@
 
 .museum-exhibition__brand {
   margin: 0;
-  font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
+  font-family: var(--font-body);
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .museum-exhibition__nav {
@@ -67,11 +66,15 @@
   font-weight: 700;
 }
 
-.museum-exhibition h1,
-.museum-exhibition__section {
+.museum-exhibition h1 {
   font-family: var(--font-display);
   font-variation-settings: var(--font-display-settings);
   font-weight: 500;
+}
+
+.museum-exhibition__section {
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
 .museum-exhibition h1 {
