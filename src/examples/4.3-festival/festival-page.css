@@ -1,135 +1,165 @@
-/*
- * Festival nocturno con el lenguaje de weAAAre en negativo: sección de tinta,
- * ondas grises y papel sobre tinta.
- */
+/* Sonidos del Norte: cartel de festival nocturno. Noche, coral, sol y mar. */
 .festival {
+  --night: #120a2b;
+  --night-soft: #1f1445;
+  --coral: #ff5c6c;
+  --sun: #ffcf3f;
+  --sea: #35d0c7;
+  --foam: #fff8ec;
+
   min-block-size: 100vh;
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--night);
+  color: var(--foam);
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.6;
 }
 
 .festival a {
-  color: var(--color-paper);
+  color: var(--foam);
   text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.25em;
 }
 
 .festival :focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: var(--focus-offset);
+  outline: 3px solid var(--sun);
+  outline-offset: 4px;
 }
 
 .festival__header {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-end: 2px solid var(--color-paper);
+  padding: 1.25rem clamp(1rem, 5vw, 4rem);
 }
 
 .festival__brand {
   margin: 0;
-  font-family: var(--font-body);
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: 1.625rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .festival__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 1.75rem;
+  font-weight: 700;
+}
+
+.festival .festival__nav a {
+  text-decoration: none;
+}
+
+.festival .festival__nav a:hover {
+  color: var(--sun);
+  text-decoration: underline;
 }
 
 .festival__hero {
   position: relative;
   display: grid;
-  min-block-size: 26rem;
-  padding: 3rem clamp(1rem, 4vw, 3rem);
+  min-block-size: min(40rem, 78vh);
+  padding: 3rem clamp(1rem, 5vw, 4rem) 5rem;
   overflow: hidden;
   isolation: isolate;
 }
 
+/* Vela oscura bajo el texto: las manchas de color nunca le quitan contraste. */
+.festival__hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    var(--night) 0%,
+    rgb(18 10 43 / 0.92) 38%,
+    rgb(18 10 43 / 0) 78%
+  );
+}
+
 .festival__wave {
   position: absolute;
-  z-index: -1;
-  inline-size: 60vmax;
-  block-size: 60vmax;
-  border-radius: 45%;
-  opacity: 0.45;
+  z-index: -2;
+  inline-size: 46vmax;
+  block-size: 46vmax;
+  border-radius: 46% 54% 58% 42% / 48% 44% 56% 52%;
 }
 
 .festival__wave--1 {
-  inset-block-start: -30vmax;
-  inset-inline-start: -10vmax;
-  background: #8a8a8a;
+  inset-block-start: -18vmax;
+  inset-inline-end: 8vmax;
+  background: var(--coral);
 }
 
 .festival__wave--2 {
-  inset-block-start: -20vmax;
-  inset-inline-end: -25vmax;
-  background: #5d5d5d;
+  inset-block-start: 2vmax;
+  inset-inline-end: -20vmax;
+  background: var(--sun);
 }
 
 .festival__wave--3 {
-  inset-block-end: -45vmax;
-  inset-inline-start: 20vmax;
-  background: #b0b0b0;
+  inset-block-end: -30vmax;
+  inset-inline-end: 4vmax;
+  background: var(--sea);
+  mix-blend-mode: screen;
 }
 
 .festival__hero-content {
   align-self: center;
-  max-inline-size: 38rem;
+  max-inline-size: 42rem;
 }
 
 .festival__dates {
   display: inline-block;
   margin: 0;
-  padding: 0.05rem 0.75rem;
-  border: 2px solid var(--color-paper);
-  border-radius: var(--radius-pill);
-  background: var(--color-paper);
-  color: var(--color-ink);
+  padding: 0.2rem 1rem;
+  border-radius: 999px;
+  background: var(--sun);
+  color: var(--night);
   font-weight: 700;
 }
 
 .festival__title {
+  margin: 1rem 0;
   font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
-  font-weight: 500;
-}
-
-.festival h2 {
-  font-family: var(--font-body);
-  font-weight: 700;
-}
-
-.festival__title {
-  margin: 0.75rem 0 0.75rem;
-  font-size: clamp(2.75rem, 1.5rem + 3.5vw, 4.3125rem);
-  line-height: 1.05;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: clamp(3rem, 1.2rem + 7vw, 7rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
 }
 
 .festival__lead {
-  margin: 0 0 1.75rem;
-  font-size: 1.25rem;
+  max-inline-size: 32rem;
+  margin: 0 0 2rem;
+  font-size: 1.3125rem;
 }
 
-/* Botón de weAAAre sobre tinta: borde y sombra de papel. */
 .festival .festival__cta {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid var(--color-paper);
-  border-radius: var(--radius-md);
-  background: var(--color-ink);
-  box-shadow: 0 6px 0 0 var(--color-paper);
-  color: var(--color-paper);
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  background: var(--coral);
+  color: var(--night);
+  font-size: 1.1875rem;
   font-weight: 700;
   text-decoration: none;
+}
+
+.festival .festival__cta:hover {
+  background: var(--foam);
 }
 
 .festival .festival__cta::after {
@@ -137,14 +167,13 @@
 }
 
 .festival__lineup {
-  padding: 2rem 0;
-  border-block: 2px solid var(--color-paper);
-  background: var(--color-paper);
-  color: var(--color-ink);
+  padding: 2rem 0 2.25rem;
+  background: var(--sun);
+  color: var(--night);
 }
 
 .festival__lineup :focus-visible {
-  outline-color: var(--color-ink);
+  outline-color: var(--night);
 }
 
 .festival__lineup-header {
@@ -153,24 +182,34 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-inline: clamp(1rem, 4vw, 3rem);
+  padding-inline: clamp(1rem, 5vw, 4rem);
 }
 
-.festival__lineup h2 {
+.festival h2 {
   margin: 0;
-  font-size: 2.1875rem;
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .festival__pause {
-  padding: 0.5rem 1rem;
-  border: var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
-  color: var(--color-ink);
+  padding: 0.55rem 1.25rem;
+  border: 2px solid var(--night);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--night);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+}
+
+.festival__pause:hover {
+  background: var(--night);
+  color: var(--sun);
 }
 
 .festival__ticker {
@@ -185,41 +224,53 @@
 
 .festival__artists {
   display: flex;
-  gap: 2.5rem;
+  gap: 3rem;
   margin: 0;
-  padding: 0 1.25rem;
+  padding: 0 1.5rem;
   list-style: none;
-  font-family: var(--font-body);
-  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.2;
   white-space: nowrap;
 }
 
+.festival__artists li:nth-child(even) {
+  color: #a3122f;
+}
+
 .festival__section {
-  max-inline-size: 48rem;
+  max-inline-size: 72rem;
   margin-inline: auto;
-  padding: 2.5rem clamp(1rem, 4vw, 3rem);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 5vw, 4rem) 0;
 }
 
 .festival__section h2 {
-  font-size: 2.1875rem;
+  margin-block-end: 1.25rem;
 }
 
-/* Tarjetas de papel sobre tinta. */
+.festival__section > p {
+  max-inline-size: 38rem;
+  margin-block: 0 4rem;
+}
+
 .festival__passes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1.25rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .festival__passes li {
-  padding: 1rem 1.25rem;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  color: var(--color-ink);
+  padding: 1.5rem 1.75rem;
+  border: 1px solid rgb(255 248 236 / 0.22);
+  border-radius: 1.25rem;
+  background: var(--night-soft);
 }
 
 .festival__passes p {
@@ -227,20 +278,26 @@
 }
 
 .festival__pass-name {
+  color: var(--sea);
   font-weight: 700;
 }
 
-.festival__pass-price {
-  font-family: var(--font-body);
-  font-size: 1.75rem;
-  font-weight: 700;
+.festival__passes .festival__pass-price {
+  margin-block: 0.25rem 0.5rem;
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
 }
 
 .festival__footer {
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-start: 2px solid var(--color-paper);
-  color: var(--color-rule-soft);
-  font-size: 0.875rem;
+  padding: 1.5rem clamp(1rem, 5vw, 4rem);
+  border-block-start: 1px solid rgb(255 248 236 / 0.22);
+  color: #cfc6e6;
+  font-size: 0.9375rem;
   text-align: center;
 }
 

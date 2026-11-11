@@ -109,10 +109,12 @@ export function FestivalPage({ fixed }: ExamplePageProps) {
             <li>
               <p className="festival__pass-name">Abono 3 días</p>
               <p className="festival__pass-price">75 €</p>
+              <p>Los tres días, todos los escenarios y zona de acampada.</p>
             </li>
             <li>
               <p className="festival__pass-name">Entrada de un día</p>
               <p className="festival__pass-price">32 €</p>
+              <p>Viernes, sábado o domingo. Eliges el día al comprar.</p>
             </li>
           </ul>
         </section>

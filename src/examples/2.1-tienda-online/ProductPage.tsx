@@ -11,8 +11,12 @@ export function ProductPage({ fixed }: ExamplePageProps) {
 
   return (
     <div className="product-page">
+      <p className="product-page__promo">
+        Envío gratis a partir de 60 € · Cada pieza se hace por encargo
+      </p>
       <header className="product-page__header">
         <a className="product-page__brand" href={`#${id}-product`}>
+          <span aria-hidden="true" className="product-page__logo" />
           Barro y Fuego
         </a>
         <nav aria-label="Principal" className="product-page__nav">
@@ -39,6 +43,11 @@ export function ProductPage({ fixed }: ExamplePageProps) {
             lavavajillas y microondas. Cada pieza tiene pequeñas variaciones de
             esmalte.
           </p>
+          <ul className="product-page__specs">
+            <li>300 ml</li>
+            <li>Apta para lavavajillas</li>
+            <li>Apta para microondas</li>
+          </ul>
           <a href={`#${id}-shipping`}>Consultar envíos y devoluciones</a>
           <div className="product-page__actions">
             {fixed ? (
@@ -77,10 +86,20 @@ export function ProductPage({ fixed }: ExamplePageProps) {
         className="product-page__section"
       >
         <h2 id={`${id}-shipping-title`}>Envíos y devoluciones</h2>
-        <p>
-          Enviamos en 48–72 horas laborables. Tienes 30 días para devolver la
-          pieza sin usar.
-        </p>
+        <ul className="product-page__perks">
+          <li>
+            <strong>Entrega en 48–72 horas</strong>
+            Enviamos en días laborables, con embalaje sin plástico.
+          </li>
+          <li>
+            <strong>30 días para devolverla</strong>
+            Si no es lo que esperabas, devuelve la pieza sin usar.
+          </li>
+          <li>
+            <strong>Si llega rota, te mandamos otra</strong>
+            Escríbenos con una foto y la reponemos sin coste.
+          </li>
+        </ul>
       </section>
       <footer id={`${id}-contact`} className="product-page__footer">
         <p>Barro y Fuego · Taller de cerámica · hola@barroyfuego.example</p>
