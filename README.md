@@ -1,5 +1,7 @@
 # Introducción al desarrollo web accesible
 
+[![CI](https://github.com/weAAAre/curso-introduccion-desarrollo-web-accesible/actions/workflows/ci.yml/badge.svg)](https://github.com/weAAAre/curso-introduccion-desarrollo-web-accesible/actions/workflows/ci.yml) [![Licencia: MIT](https://img.shields.io/badge/licencia-MIT-informational.svg)](./LICENSE)
+
 Ejemplos del curso **Introducción al desarrollo web accesible** de [weAAAre](https://weaaare.com), con Jesús González Álvarez.
 
 Los errores de accesibilidad más frecuentes en la web y cómo resolverlos con HTML y CSS.
@@ -50,14 +52,6 @@ Cada carpeta de `src/examples/` contiene:
 
 `src/examples/registry.ts` registra los ejemplos en el orden del curso.
 
-## Cómo añadir un ejemplo
-
-1. Crea la carpeta `src/examples/<lección>-<slug>/` con los cuatro archivos de arriba. Lo más rápido es copiar un ejemplo parecido.
-2. Añádelo a `src/examples/registry.ts`, en el orden del curso, y a la tabla de este README.
-3. Ejecuta `pnpm check`.
-
-Al subir a `main`, GitHub Actions pasa las comprobaciones y publica la web en GitHub Pages.
-
 ## Estilo de los ejemplos
 
 Cada ejemplo es la web de una empresa ficticia, con su marca, sus colores y contenido verosímil, como las webs de práctica de [retos.weaaare.com](https://retos.weaaare.com). Con ratón todo funciona; fuera de las barreras que enseña la lección, todo es accesible. No llevan dependencias ni recursos externos, y nada se mueve solo salvo en la lección de movimiento.
@@ -71,3 +65,11 @@ pnpm check
 ```
 
 Ejecuta las pruebas (Vitest, Testing Library y axe), el lint (Biome) y la compilación. Las pruebas automáticas no sustituyen la revisión con teclado, lector de pantalla y zoom.
+
+## Contribuir
+
+Las reglas de los ejemplos y los pasos para añadir uno están en [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Licencia
+
+El código se publica con licencia [MIT](./LICENSE). El nombre y el logotipo de weAAAre son marca de weAAAre y no forman parte de esa licencia. Las tipografías (Fraunces y Atkinson Hyperlegible) se distribuyen con la SIL Open Font License.
