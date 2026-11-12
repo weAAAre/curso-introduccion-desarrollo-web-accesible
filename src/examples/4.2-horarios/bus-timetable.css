@@ -46,14 +46,43 @@
 }
 
 .bus-timetable__header {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* Franja de utilidades: aviso del día y horario de atención. */
+.bus-timetable__utility {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 2rem;
+  padding: 0.45rem clamp(1rem, 5vw, 4rem);
+  background: var(--navy-deep);
+  color: #dbe7f0;
+  font-size: 0.875rem;
+}
+
+.bus-timetable__utility-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.bus-timetable__utility-icon {
+  flex: none;
+  inline-size: 1.1em;
+  block-size: 1.1em;
+  color: var(--cyan-light);
+}
+
+.bus-timetable__bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem 2rem;
   padding: 1em clamp(1rem, 5vw, 4rem);
-  background: var(--navy);
-  color: #fff;
 }
 
 .bus-timetable__brand {
@@ -83,7 +112,8 @@
 .bus-timetable__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem 1.75rem;
+  align-items: center;
+  gap: 0.5rem 1.75rem;
 }
 
 .bus-timetable .bus-timetable__nav a {
@@ -96,6 +126,71 @@
   color: #fff;
   text-decoration: underline;
   text-decoration-thickness: 2px;
+}
+
+.bus-timetable .bus-timetable__nav .bus-timetable__account {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3em 0.9em;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.bus-timetable .bus-timetable__nav .bus-timetable__account:hover {
+  border-color: var(--cyan-light);
+  background: rgb(255 255 255 / 0.08);
+  text-decoration: none;
+}
+
+.bus-timetable__nav-icon {
+  flex: none;
+  inline-size: 1.15em;
+  block-size: 1.15em;
+  color: var(--cyan-light);
+}
+
+/* Migas: dónde estás dentro de la web. */
+.bus-timetable__crumbs {
+  max-inline-size: 76rem;
+  margin-inline: auto;
+  padding: 1rem clamp(1rem, 5vw, 4rem) 0;
+  font-size: 0.9375rem;
+}
+
+.bus-timetable__crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bus-timetable__crumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bus-timetable__crumbs li + li::before {
+  content: "";
+  inline-size: 0.4rem;
+  block-size: 0.4rem;
+  border-block-start: 1.5px solid var(--ink-soft);
+  border-inline-end: 1.5px solid var(--ink-soft);
+  rotate: 45deg;
+}
+
+.bus-timetable .bus-timetable__crumbs a {
+  font-weight: 400;
+}
+
+.bus-timetable .bus-timetable__crumbs a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .bus-timetable__main {
@@ -114,8 +209,17 @@
   }
 
   .bus-timetable__hero,
-  .bus-timetable__board {
+  .bus-timetable__board,
+  .bus-timetable__app {
     grid-column: 1 / -1;
+  }
+
+  .bus-timetable__stops-panel {
+    grid-column: 1;
+  }
+
+  .bus-timetable__aside {
+    grid-column: 2;
   }
 }
 
@@ -318,16 +422,323 @@
   color: var(--navy);
 }
 
+/*
+ * Lo que rodea a la lección va en rem también con la barrera: crece con el
+ * tamaño de letra elegido y no suma fallos a los que enseña la lección.
+ */
+.bus-timetable__panel {
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(11 46 79 / 0.06);
+  font-size: 1rem;
+}
+
+.bus-timetable .bus-timetable__panel h2,
+.bus-timetable .bus-timetable__app h2 {
+  font-size: 1.375rem;
+}
+
+.bus-timetable__panel-lead {
+  margin: -0.25rem 0 1.25rem;
+  color: var(--ink-soft);
+}
+
+.bus-timetable__aside {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  min-inline-size: 0;
+}
+
+/* Recorrido: una línea vertical con una parada por punto. */
+.bus-timetable__stops {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bus-timetable__stop-item {
+  position: relative;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0 0 1.1rem 2.25rem;
+}
+
+.bus-timetable__stop-item::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.55rem -0.55rem;
+  inset-inline-start: 0.5rem;
+  inline-size: 0.3rem;
+  background: var(--cyan);
+}
+
+.bus-timetable__stop-item:last-child::before {
+  display: none;
+}
+
+.bus-timetable__stop-item::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0.4rem;
+  inset-inline-start: 0.2rem;
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
+  box-sizing: border-box;
+  border: 0.22rem solid var(--blue);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.bus-timetable__stop-item--current::after {
+  inset-block-start: 0.25rem;
+  inset-inline-start: 0;
+  inline-size: 1.3rem;
+  block-size: 1.3rem;
+  border: 0.35rem solid var(--navy);
+}
+
+.bus-timetable__stop-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.6rem;
+  font-weight: 700;
+}
+
+.bus-timetable__here {
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+.bus-timetable__stop-meta {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.bus-timetable__stop-note {
+  justify-self: start;
+  margin-block-start: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-inline-start: 0.25rem solid var(--warning);
+  background: #fdf1e9;
+  font-size: 0.9375rem;
+}
+
+/* Otras líneas que paran aquí. */
+.bus-timetable__others {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bus-timetable__other {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding-block: 0.75rem;
+  border-block-end: 1px solid var(--line);
+}
+
+.bus-timetable__other:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.bus-timetable__badge {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-inline-size: 2.4rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.45rem;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.bus-timetable__badge--coral {
+  background: #b93a12;
+}
+
+.bus-timetable__badge--violet {
+  background: #5b3aa8;
+}
+
+.bus-timetable__badge--night {
+  background: var(--navy-deep);
+}
+
+.bus-timetable__other-text {
+  display: grid;
+  min-inline-size: 0;
+}
+
+.bus-timetable__other-next {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+/* Horario: tabla de frecuencias por tipo de día. */
+.bus-timetable__table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.bus-timetable__table th,
+.bus-timetable__table td {
+  padding: 0.55rem 0.5rem 0.55rem 0;
+  border-block-end: 1px solid var(--line);
+  text-align: start;
+  vertical-align: top;
+}
+
+.bus-timetable__table thead th {
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bus-timetable__table-note {
+  margin: 0.75rem 0 1rem;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+.bus-timetable .bus-timetable__download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.bus-timetable__link-icon {
+  flex: none;
+  inline-size: 1.2em;
+  block-size: 1.2em;
+}
+
+/* Promoción de la app, al pie del contenido. */
+.bus-timetable__app {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 1.25rem;
+  background: linear-gradient(120deg, #d9eef6, #eaf1f6 60%);
+  border: 1px solid var(--line);
+  font-size: 1rem;
+}
+
+.bus-timetable__app-art {
+  flex: none;
+  inline-size: 8rem;
+  block-size: auto;
+}
+
+.bus-timetable__app-text {
+  flex: 1 1 18rem;
+}
+
+.bus-timetable__app-text p {
+  max-inline-size: 36rem;
+  margin: 0 0 1rem;
+}
+
+.bus-timetable .bus-timetable__app-link {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  text-decoration: none;
+}
+
+.bus-timetable .bus-timetable__app-link:hover {
+  background: var(--blue);
+  color: #fff;
+}
+
 .bus-timetable__footer {
-  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  padding: 2.5rem clamp(1rem, 5vw, 4rem) 1.5rem;
   background: var(--navy-deep);
   color: #c7d9e6;
-  font-size: 0.9375em;
-  text-align: center;
+  font-size: 0.9375rem;
+}
+
+.bus-timetable__footer :focus-visible {
+  outline-color: var(--cyan-light);
+}
+
+.bus-timetable__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 2rem;
+  max-inline-size: 76rem;
+  margin-inline: auto;
 }
 
 .bus-timetable__footer p {
+  margin: 0 0 0.75rem;
+}
+
+.bus-timetable__footer-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.bus-timetable .bus-timetable__footer h2 {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.bus-timetable__footer ul {
+  display: grid;
+  gap: 0.45rem;
   margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bus-timetable .bus-timetable__footer a {
+  color: #fff;
+  font-weight: 400;
+}
+
+.bus-timetable .bus-timetable__footer a:hover {
+  color: var(--cyan-light);
+}
+
+.bus-timetable__footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  max-inline-size: 76rem;
+  margin: 2rem auto 0;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid rgb(199 217 230 / 0.25);
+}
+
+.bus-timetable__footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
 }
 
 /*

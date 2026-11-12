@@ -29,6 +29,32 @@
 .festival__header {
   position: relative;
   z-index: 1;
+  background: var(--night);
+}
+
+/* Franja de aviso: lo que la gente busca nada más entrar. */
+.festival__topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem 0.6rem;
+  margin: 0;
+  padding: 0.5rem clamp(1rem, 5vw, 4rem);
+  background: var(--coral);
+  color: var(--night);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.festival__topbar-icon {
+  flex: none;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+}
+
+.festival__bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -38,6 +64,9 @@
 }
 
 .festival__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   margin: 0;
   font-family: var(--font-display);
   font-variation-settings:
@@ -48,10 +77,16 @@
   letter-spacing: -0.01em;
 }
 
+.festival__logo {
+  flex: none;
+  inline-size: 2.4rem;
+  block-size: 2.4rem;
+}
+
 .festival__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75rem;
+  gap: 0.25rem 1.75rem;
   font-weight: 700;
 }
 
@@ -242,19 +277,150 @@
   color: #a3122f;
 }
 
+/* Cifras del festival bajo el botón: texto, no adorno. */
+.festival__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin: 2.5rem 0 0;
+  color: #e6def7;
+}
+
+.festival__facts strong {
+  display: block;
+  color: var(--foam);
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
 .festival__section {
   max-inline-size: 72rem;
   margin-inline: auto;
-  padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 5vw, 4rem) 0;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 5vw, 4rem) 0;
 }
 
-.festival__section h2 {
-  margin-block-end: 1.25rem;
+.festival__section--last {
+  padding-block-end: clamp(3rem, 6vw, 5rem);
 }
 
-.festival__section > p {
-  max-inline-size: 38rem;
-  margin-block: 0 4rem;
+.festival__section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem 3rem;
+  margin-block-end: 2rem;
+}
+
+.festival__section-head p {
+  max-inline-size: 34rem;
+  margin: 0;
+  color: #e6def7;
+}
+
+/* Horarios: una tabla por día, como el cartel impreso. */
+.festival__days {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1.25rem;
+}
+
+.festival__day {
+  padding: 1.5rem 1.5rem 1rem;
+  border: 1px solid rgb(255 248 236 / 0.22);
+  border-radius: 1.25rem;
+  background: var(--night-soft);
+}
+
+.festival__table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.festival__table caption {
+  margin-block-end: 1rem;
+  text-align: start;
+}
+
+.festival__day-name {
+  display: block;
+  color: var(--sun);
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.festival__day-note {
+  display: block;
+  margin-block-start: 0.25rem;
+  color: #e6def7;
+  font-size: 0.9375rem;
+}
+
+.festival__table thead th {
+  padding: 0 0.5rem 0.5rem 0;
+  border-block-end: 1px solid rgb(255 248 236 / 0.22);
+  color: #e6def7;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: start;
+  text-transform: uppercase;
+}
+
+.festival__table td,
+.festival__table tbody th {
+  padding: 0.7rem 0.5rem 0.7rem 0;
+  border-block-end: 1px solid rgb(255 248 236 / 0.12);
+  text-align: start;
+  vertical-align: baseline;
+}
+
+.festival__table tbody th {
+  font-weight: 700;
+}
+
+.festival__table tbody tr:last-child td,
+.festival__table tbody tr:last-child th {
+  border-block-end: 0;
+}
+
+.festival__time {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* El nombre del escenario va escrito; el color solo acompaña. */
+.festival__stage {
+  display: inline-block;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  color: var(--night);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.festival__stage--faro {
+  background: var(--sun);
+}
+
+.festival__stage--muelle {
+  background: var(--sea);
+}
+
+.festival__stage--salitre {
+  background: #ffb3ba;
 }
 
 .festival__passes {
@@ -266,15 +432,32 @@
   list-style: none;
 }
 
-.festival__passes li {
-  padding: 1.5rem 1.75rem;
+.festival__pass {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.75rem 1.75rem;
   border: 1px solid rgb(255 248 236 / 0.22);
   border-radius: 1.25rem;
   background: var(--night-soft);
 }
 
+.festival__pass--featured {
+  border: 2px solid var(--sun);
+}
+
 .festival__passes p {
   margin: 0;
+}
+
+.festival__passes .festival__pass-tag {
+  align-self: start;
+  margin-block-end: 0.75rem;
+  padding: 0.1rem 0.75rem;
+  border-radius: 999px;
+  background: var(--sun);
+  color: var(--night);
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 
 .festival__pass-name {
@@ -293,12 +476,189 @@
   line-height: 1.1;
 }
 
+.festival .festival__pass-link {
+  align-self: start;
+  margin-block-start: auto;
+  padding-block-start: 1.25rem;
+  font-weight: 700;
+}
+
+.festival .festival__pass-link:hover {
+  color: var(--sun);
+}
+
+.festival__access {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-inline-size: 52rem;
+  margin: 2rem 0 0;
+  padding: 1.25rem 1.5rem;
+  border-inline-start: 0.35rem solid var(--sea);
+  border-radius: 0 1rem 1rem 0;
+  background: rgb(53 208 199 / 0.1);
+}
+
+.festival__access-icon {
+  flex: none;
+  inline-size: 2rem;
+  block-size: 2rem;
+  color: var(--sea);
+}
+
+/* Cómo llegar: plano ilustrado del puerto y opciones de transporte. */
+.festival__travel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  align-items: start;
+  gap: 2rem 3rem;
+}
+
+.festival__map {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.35);
+}
+
+.festival__ways {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.festival__ways li {
+  display: grid;
+  gap: 0.2rem;
+  padding-block-end: 1.25rem;
+  border-block-end: 1px solid rgb(255 248 236 / 0.22);
+}
+
+.festival__ways li:last-child {
+  border-block-end: 0;
+}
+
+.festival__ways strong {
+  color: var(--sun);
+  font-size: 1.1875rem;
+}
+
+/* Dónde dormir: banda con ilustración de la acampada. */
+.festival__stay {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  align-items: center;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 1.5rem;
+  background: var(--night-soft);
+}
+
+.festival__stay h2 {
+  margin-block-end: 1rem;
+}
+
+.festival__stay p {
+  max-inline-size: 34rem;
+  margin: 0 0 1rem;
+}
+
+.festival .festival__stay-link {
+  display: inline-block;
+  margin-block-start: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  background: var(--sea);
+  color: var(--night);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.festival .festival__stay-link:hover {
+  background: var(--foam);
+}
+
+.festival__tent {
+  inline-size: 100%;
+  max-inline-size: 26rem;
+  block-size: auto;
+  justify-self: center;
+}
+
 .festival__footer {
-  padding: 1.5rem clamp(1rem, 5vw, 4rem);
+  padding: 3rem clamp(1rem, 5vw, 4rem) 1.5rem;
   border-block-start: 1px solid rgb(255 248 236 / 0.22);
+  background: #0c0620;
   color: #cfc6e6;
   font-size: 0.9375rem;
-  text-align: center;
+}
+
+.festival__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 2rem;
+  max-inline-size: 72rem;
+  margin-inline: auto;
+}
+
+.festival__footer p {
+  margin: 0 0 0.75rem;
+}
+
+.festival__footer-brand {
+  color: var(--foam);
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.festival .festival__footer h2 {
+  margin-block-end: 0.75rem;
+  color: var(--foam);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.festival__footer ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.festival .festival__footer a {
+  text-decoration-thickness: 1px;
+}
+
+.festival .festival__footer a:hover {
+  color: var(--sun);
+  text-decoration-thickness: 2px;
+}
+
+.festival__footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  max-inline-size: 72rem;
+  margin: 2rem auto 0;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid rgb(255 248 236 / 0.18);
+}
+
+.festival__footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
 }
 
 @keyframes festival-drift {

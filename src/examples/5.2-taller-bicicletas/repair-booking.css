@@ -38,14 +38,43 @@
 }
 
 .repair-booking__header {
+  background: var(--graphite);
+  color: #fff;
+}
+
+/* Franja de utilidades: horario de hoy y recogida. */
+.repair-booking__utility {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 2rem;
+  padding: 0.45rem clamp(1rem, 5vw, 4rem);
+  background: #15181c;
+  color: #c8ccd2;
+  font-size: 0.875rem;
+}
+
+.repair-booking__utility p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.repair-booking__icon {
+  flex: none;
+  inline-size: 1.15em;
+  block-size: 1.15em;
+  color: var(--orange);
+}
+
+.repair-booking__bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem 2.5rem;
   padding: 1.1rem clamp(1rem, 5vw, 4rem);
-  background: var(--graphite);
-  color: #fff;
 }
 
 .repair-booking__brand {
@@ -88,7 +117,8 @@
 .repair-booking__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem 1.75rem;
+  align-items: center;
+  gap: 0.5rem 1.75rem;
 }
 
 .repair-booking .repair-booking__nav a {
@@ -100,6 +130,19 @@
 .repair-booking .repair-booking__nav a:hover {
   text-decoration: underline;
   text-decoration-color: var(--orange);
+}
+
+.repair-booking .repair-booking__nav .repair-booking__nav-cta {
+  padding: 0.35rem 1.1rem;
+  border-radius: 0.6rem;
+  background: var(--orange);
+  color: var(--graphite);
+  font-weight: 700;
+}
+
+.repair-booking .repair-booking__nav .repair-booking__nav-cta:hover {
+  background: var(--orange-light);
+  text-decoration: none;
 }
 
 /* Portada: argumentos a la izquierda y formulario de cita a la derecha. */
@@ -120,7 +163,8 @@
 
   .repair-booking h1,
   .repair-booking__intro,
-  .repair-booking__facts {
+  .repair-booking__facts,
+  .repair-booking__art {
     grid-column: 1;
   }
 
@@ -137,6 +181,21 @@
   .repair-booking__services {
     grid-column: 1 / -1;
     grid-row: 6;
+  }
+
+  .repair-booking__prices {
+    grid-column: 1;
+    grid-row: 7;
+  }
+
+  .repair-booking__reviews {
+    grid-column: 2;
+    grid-row: 7;
+  }
+
+  .repair-booking__shop {
+    grid-column: 1 / -1;
+    grid-row: 8;
   }
 }
 
@@ -295,14 +354,257 @@
   font-weight: 700;
 }
 
+/* Ilustración del taller: hace de foto, sin información propia. */
+.repair-booking__art {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 34rem;
+  block-size: auto;
+  margin-block-end: 2rem;
+  border-radius: 1.1rem;
+  box-shadow: 0 16px 40px rgb(31 35 40 / 0.18);
+}
+
+.repair-booking__prices,
+.repair-booking__reviews {
+  margin-block-start: 3rem;
+}
+
+.repair-booking__table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgb(31 35 40 / 0.06);
+  overflow: hidden;
+}
+
+.repair-booking__table th,
+.repair-booking__table td {
+  padding: 0.8rem 1rem;
+  border-block-end: 1px solid var(--line);
+  text-align: start;
+  vertical-align: top;
+}
+
+.repair-booking__table thead th {
+  background: var(--graphite);
+  color: #fff;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.repair-booking__table tbody tr:last-child th,
+.repair-booking__table tbody tr:last-child td {
+  border-block-end: 0;
+}
+
+.repair-booking__table tbody tr:hover {
+  background: #fff6ef;
+}
+
+.repair-booking__table td:nth-child(2) {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+@media (max-width: 30rem) {
+  .repair-booking__table th,
+  .repair-booking__table td {
+    padding: 0.7rem 0.6rem;
+  }
+
+  .repair-booking__table thead th {
+    letter-spacing: 0;
+  }
+}
+
+.repair-booking__note {
+  margin: 0.75rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.repair-booking__score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: -0.5rem 0 1.25rem;
+  color: var(--ink-soft);
+}
+
+.repair-booking__score-number {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.repair-booking__quotes {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.repair-booking__quote {
+  padding: 1.1rem 1.35rem;
+  border-inline-start: 0.3rem solid var(--orange);
+  border-radius: 0 1rem 1rem 0;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(31 35 40 / 0.06);
+}
+
+.repair-booking__quote blockquote {
+  margin: 0;
+}
+
+.repair-booking__quote p {
+  margin: 0;
+}
+
+.repair-booking__stars {
+  display: flex;
+  gap: 0.15rem;
+  margin-block-end: 0.4rem;
+}
+
+.repair-booking__star {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+  fill: var(--orange-ink);
+}
+
+.repair-booking__star--off {
+  fill: #c9c6bf;
+}
+
+.repair-booking .repair-booking__author {
+  margin-block-start: 0.5rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.repair-booking__shop {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem 3rem;
+  margin-block-start: 3rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  background: var(--graphite);
+  color: #e6e7ea;
+}
+
+.repair-booking__shop h2 {
+  color: #fff;
+}
+
+.repair-booking__shop p {
+  max-inline-size: 36rem;
+  margin: 0 0 1rem;
+}
+
+.repair-booking__hours {
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+.repair-booking__hours div {
+  padding-block-end: 0.9rem;
+  border-block-end: 1px solid rgb(255 255 255 / 0.15);
+}
+
+.repair-booking__hours dt {
+  color: var(--orange-light);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.repair-booking__hours dd {
+  margin: 0;
+  color: #fff;
+}
+
 .repair-booking__footer {
-  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  padding: 2.5rem clamp(1rem, 5vw, 4rem) 1.5rem;
   background: var(--graphite);
   color: #c8ccd2;
   font-size: 0.9375rem;
-  text-align: center;
+}
+
+.repair-booking__footer :focus-visible {
+  outline-color: var(--orange);
+}
+
+.repair-booking__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 2rem;
+  max-inline-size: 76rem;
+  margin-inline: auto;
 }
 
 .repair-booking__footer p {
+  margin: 0 0 0.6rem;
+}
+
+.repair-booking__footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.repair-booking .repair-booking__footer h2 {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.repair-booking__footer ul {
+  display: grid;
+  gap: 0.45rem;
   margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.repair-booking .repair-booking__footer a {
+  color: #fff;
+  font-weight: 400;
+}
+
+.repair-booking .repair-booking__footer a:hover {
+  color: var(--orange-light);
+}
+
+.repair-booking__footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  max-inline-size: 76rem;
+  margin: 2rem auto 0;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid rgb(200 204 210 / 0.25);
+}
+
+.repair-booking__footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
 }

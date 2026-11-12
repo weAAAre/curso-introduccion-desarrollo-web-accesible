@@ -15,6 +15,7 @@
   --teal: #2f7f7a;
   --coral: #d9644a;
   --navy: #26406b;
+  --teal-ink: #1f6560;
 
   min-block-size: 100vh;
   background: var(--paper);
@@ -52,11 +53,43 @@ html.library-login-scroll-padding {
   scroll-padding-block-start: 6rem;
 }
 
-/* En pantallas estrechas la cabecera ocupa dos líneas: se reserva más altura. */
+/* Cuando el menú baja a otra línea, la cabecera crece: se reserva más altura. */
+@media (max-width: 60rem) {
+  html.library-login-scroll-padding {
+    scroll-padding-block-start: 7.75rem;
+  }
+}
+
 @media (max-width: 40rem) {
   html.library-login-scroll-padding {
-    scroll-padding-block-start: 8rem;
+    scroll-padding-block-start: 9.75rem;
   }
+}
+
+/* Barra superior: estado del día. No es fija; la cabecera de debajo sí. */
+.library-login__topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 2rem;
+  padding: 0.45rem clamp(1rem, 5vw, 4rem);
+  background: var(--plum-deep);
+  color: #e6dcf3;
+  font-size: 0.9375rem;
+}
+
+.library-login__topbar p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.library-login__dot {
+  inline-size: 0.6rem;
+  block-size: 0.6rem;
+  border-radius: 50%;
+  background: #7fd1a8;
 }
 
 .library-login__header {
@@ -109,6 +142,16 @@ html.library-login-scroll-padding {
   background: #c9b6ec;
   transform: rotate(14deg);
   transform-origin: 0 100%;
+}
+
+.library-login__brand-sub {
+  display: block;
+  color: #d9cdea;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .library-login__nav {
@@ -375,43 +418,25 @@ html.library-login-scroll-padding {
   rotate: 45deg;
 }
 
-.library-login__books a::before {
-  content: "";
+.library-login__cover {
   flex: none;
   inline-size: 3.25rem;
-  aspect-ratio: 3 / 4;
-  border-radius: 0.15rem 0.4rem 0.4rem 0.15rem;
-  background:
-    linear-gradient(90deg, rgb(0 0 0 / 0.18) 0 0.25rem, transparent 0.25rem),
-    linear-gradient(
-      transparent 62%,
-      rgb(255 255 255 / 0.85) 62% 66%,
-      transparent 66%
-    ),
-    var(--cover, var(--plum));
+  block-size: auto;
+  border-radius: 0.15rem 0.35rem 0.35rem 0.15rem;
   box-shadow:
     0 1px 2px rgb(35 29 43 / 0.14),
-    0 4px 10px rgb(35 29 43 / 0.1);
+    0 4px 10px rgb(35 29 43 / 0.12);
 }
 
-.library-login__books li:nth-child(2) a {
-  --cover: var(--mustard);
+.library-login__book {
+  display: grid;
+  gap: 0.15rem;
 }
 
-.library-login__books li:nth-child(3) a {
-  --cover: var(--teal);
-}
-
-.library-login__books li:nth-child(4) a {
-  --cover: var(--coral);
-}
-
-.library-login__books li:nth-child(5) a {
-  --cover: var(--navy);
-}
-
-.library-login__books li:nth-child(6) a {
-  --cover: var(--violet);
+.library-login__book-meta {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  font-weight: 400;
 }
 
 .library-login__hours {
@@ -421,27 +446,210 @@ html.library-login-scroll-padding {
 }
 
 .library-login__hours p {
-  margin-block: 0 1rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
 }
 
-.library-login__hours p:first-of-type {
+.library-login__hours-table {
+  inline-size: 100%;
+  margin-block-end: 1.25rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.library-login__hours-table th,
+.library-login__hours-table td {
+  padding-block: 0.6rem;
+  border-block-end: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.library-login__hours-table th {
+  padding-inline-end: 1rem;
+  font-weight: 400;
+  text-align: start;
+}
+
+.library-login__hours-table td {
   font-weight: 700;
+  text-align: end;
+  white-space: nowrap;
 }
 
-.library-login__hours p:last-child {
-  margin-block-end: 0;
+/* Actividades: fecha en bloque y datos de la sesión. */
+.library-login__event-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.library-login__event {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding-block: 1.1rem;
+  border-block-end: 1px solid var(--line);
+}
+
+.library-login__event:first-child {
+  padding-block-start: 0;
+}
+
+.library-login__event p {
+  margin: 0;
+}
+
+.library-login__date {
+  display: grid;
+  place-content: center;
+  block-size: 4.5rem;
+  border-radius: 0.9rem;
+  background: var(--lavender);
+  color: var(--plum);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.library-login__day {
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.library-login__tag {
+  color: var(--teal-ink);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.library-login .library-login__event a {
+  color: var(--ink);
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+
+.library-login .library-login__event a:hover {
+  color: var(--violet);
+}
+
+.library-login .library-login__event-detail {
+  margin-block-start: 0.2rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+/* Servicios del carné. */
+.library-login__services {
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--lavender);
+}
+
+.library-login__services ul {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1rem;
+}
+
+.library-login__services ul > li {
+  padding-inline-start: 1.1rem;
+  border-inline-start: 3px solid var(--violet);
   color: var(--ink-soft);
 }
 
+.library-login__services strong {
+  display: block;
+  color: var(--ink);
+}
+
 .library-login__footer {
-  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1rem, 5vw, 4rem) 1.5rem;
   background: var(--plum-deep);
   color: #d9cdea;
   font-size: 0.9375rem;
-  text-align: center;
 }
 
 .library-login__footer p {
+  margin: 0 0 0.4rem;
+}
+
+.library-login__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 2rem;
+  max-inline-size: 76rem;
+  margin-inline: auto;
+}
+
+.library-login__footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fff;
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.library-login__footer address {
+  font-style: normal;
+}
+
+.library-login .library-login__footer-title {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.library-login__footer ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.library-login .library-login__footer a {
+  color: #fff;
+  font-weight: 400;
+}
+
+.library-login .library-login__footer a:hover {
+  color: #f5c84c;
+}
+
+.library-login__footer :focus-visible {
+  outline-color: #f5c84c;
+}
+
+.library-login__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  max-inline-size: 76rem;
+  margin: 2.5rem auto 0;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid rgb(217 205 234 / 0.25);
+}
+
+.library-login .library-login__legal p {
   margin: 0;
 }
 

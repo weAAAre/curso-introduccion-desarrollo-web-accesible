@@ -7,6 +7,7 @@
   --crust: #2b241f;
   --crust-soft: #655a51;
   --line: #e6dccb;
+  --gutter: clamp(1rem, 5vw, 4rem);
 
   min-block-size: 100vh;
   background: var(--flour);
@@ -31,17 +32,34 @@
 }
 
 .recipe-page__header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem clamp(1rem, 5vw, 4rem);
   border-block-end: 1px solid var(--line);
   background: #fff;
 }
 
+.recipe-page__topline {
+  margin: 0;
+  padding: 0.4rem var(--gutter);
+  background: var(--olive);
+  color: #fff;
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+.recipe-page__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  max-inline-size: 76rem;
+  margin-inline: auto;
+  padding: 1.1rem var(--gutter);
+}
+
 .recipe-page__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   margin: 0;
   color: var(--tomato);
   font-family: var(--font-display);
@@ -51,24 +69,76 @@
   font-weight: 600;
 }
 
+/* Marca: una cuchara de palo inclinada. */
+.recipe-page__logo {
+  position: relative;
+  flex: none;
+  inline-size: 1.1rem;
+  block-size: 1.6rem;
+  rotate: 30deg;
+}
+
+.recipe-page__logo::before,
+.recipe-page__logo::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  margin-inline: auto;
+  background: var(--tomato);
+}
+
+.recipe-page__logo::before {
+  inset-block-start: 0;
+  inline-size: 0.8rem;
+  block-size: 0.65rem;
+  border-radius: 50%;
+}
+
+.recipe-page__logo::after {
+  inset-block-end: 0;
+  inline-size: 0.22rem;
+  block-size: 1rem;
+  border-radius: 1rem;
+}
+
 .recipe-page__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75rem;
+  gap: 0.25rem 1.5rem;
 }
 
 .recipe-page .recipe-page__nav a {
+  padding-block: 0.25rem;
   text-decoration: none;
 }
 
 .recipe-page .recipe-page__nav a:hover {
   text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .recipe-page__main {
   max-inline-size: 58rem;
   margin-inline: auto;
-  padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 5vw, 4rem) 4rem;
+  padding: 1.25rem var(--gutter) 4rem;
+}
+
+.recipe-page__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  margin-block-end: 1.25rem;
+  color: var(--crust-soft);
+  font-size: 0.9375rem;
+}
+
+.recipe-page .recipe-page__crumbs a {
+  color: var(--crust-soft);
+}
+
+.recipe-page .recipe-page__crumbs a:hover {
+  color: var(--tomato);
 }
 
 .recipe-page__main > p,
@@ -79,10 +149,10 @@
 .recipe-page__photo {
   display: block;
   inline-size: 100%;
-  block-size: clamp(14rem, 34vw, 24rem);
+  block-size: clamp(13rem, 40vw, 26rem);
   margin-block-end: 2rem;
   border-radius: 1.5rem;
-  background: #e9dcc3;
+  background: #b98d5f;
 }
 
 .recipe-page__meta {
@@ -106,6 +176,75 @@
 .recipe-page__title + p {
   color: var(--crust-soft);
   font-size: 1.375rem;
+}
+
+.recipe-page__byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  margin-block: 1.25rem 0;
+  color: var(--crust-soft);
+  font-size: 1rem;
+}
+
+.recipe-page__byline strong {
+  color: var(--crust);
+}
+
+/* Firma: retrato de Marta reducido a un círculo con delantal. */
+.recipe-page__avatar {
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 36%, #f1c9a5 0 24%, transparent 25%),
+    radial-gradient(ellipse at 50% 108%, var(--tomato) 0 46%, transparent 47%),
+    radial-gradient(circle at 50% 30%, #5a3a26 0 33%, transparent 34%),
+    var(--olive-tint);
+}
+
+.recipe-page__rating span {
+  color: #a1501d;
+  letter-spacing: 0.08em;
+}
+
+.recipe-page__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+  max-inline-size: 40rem;
+  margin: 1.75rem 0 0;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.recipe-page__facts div {
+  padding: 0.85rem 1.1rem;
+}
+
+.recipe-page__facts div + div {
+  border-inline-start: 1px solid var(--line);
+}
+
+.recipe-page__facts dt {
+  color: var(--crust-soft);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.recipe-page__facts dd {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.recipe-page__main > .recipe-page__note {
+  margin-block: 0 0.5rem;
+  color: var(--crust-soft);
+  font-size: 1rem;
 }
 
 .recipe-page__heading {
@@ -173,14 +312,139 @@
   background: #fff;
 }
 
+/* Más recetas: tarjetas con la foto del plato. */
+.recipe-page__more {
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--gutter);
+  border-block-start: 1px solid var(--line);
+  background: var(--olive-tint);
+}
+
+.recipe-page__more > * {
+  max-inline-size: 76rem;
+  margin-inline: auto;
+}
+
+.recipe-page__more-intro {
+  margin-block: 0 1.5rem;
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.recipe-page__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 1.75rem 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.recipe-page__card {
+  position: relative;
+}
+
+.recipe-page__thumb {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  margin-block-end: 0.75rem;
+  border-radius: 1rem;
+}
+
+.recipe-page .recipe-page__card a {
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+/* Toda la tarjeta lleva a la receta; el enlace sigue siendo solo el nombre. */
+.recipe-page__card a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+}
+
+.recipe-page .recipe-page__card a:hover {
+  color: var(--tomato);
+  text-decoration: underline;
+}
+
+.recipe-page__card a:focus-visible {
+  outline: none;
+}
+
+.recipe-page__card a:focus-visible::after {
+  outline: 3px solid var(--tomato);
+  outline-offset: 4px;
+}
+
+.recipe-page__card p {
+  margin: 0.25rem 0 0;
+  color: var(--crust-soft);
+  font-size: 1rem;
+}
+
 .recipe-page__footer {
-  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--gutter) 1.5rem;
   background: var(--crust);
   color: #eadfce;
   font-size: 0.9375rem;
-  text-align: center;
 }
 
 .recipe-page__footer p {
   margin: 0;
+}
+
+.recipe-page__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 2rem;
+  max-inline-size: 76rem;
+  margin-inline: auto;
+}
+
+.recipe-page__footer-brand {
+  margin-block-end: 0.5rem;
+  color: #fff;
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.recipe-page__footer-links {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recipe-page .recipe-page__footer a {
+  color: #fff;
+}
+
+.recipe-page .recipe-page__footer a:hover {
+  color: #ffd2bf;
+}
+
+.recipe-page__footer :focus-visible {
+  outline-color: #ffb59c;
+}
+
+.recipe-page__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  max-inline-size: 76rem;
+  margin: 2.5rem auto 0;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid rgb(234 223 206 / 0.25);
 }

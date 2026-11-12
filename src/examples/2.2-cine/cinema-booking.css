@@ -6,6 +6,7 @@
   --gold-soft: #ffe19a;
   --cream: #f8efe1;
   --mute: #c9b7bd;
+  --gutter: clamp(1rem, 5vw, 4rem);
 
   min-block-size: 100vh;
   background:
@@ -31,13 +32,50 @@
   outline-offset: 4px;
 }
 
+/* Barra superior: promoción del día y accesos de socio. */
+.cinema-booking__topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 2rem;
+  padding: 0.45rem var(--gutter);
+  background: var(--gold);
+  color: var(--velvet);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.cinema-booking__topbar p {
+  margin: 0;
+}
+
+.cinema-booking__topbar-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.cinema-booking .cinema-booking__topbar a {
+  color: var(--velvet);
+}
+
+.cinema-booking .cinema-booking__topbar a:hover {
+  color: var(--velvet);
+  text-decoration-thickness: 2px;
+}
+
+.cinema-booking__topbar :focus-visible {
+  outline-color: var(--velvet);
+  outline-offset: 2px;
+}
+
 .cinema-booking__header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.25rem clamp(1rem, 5vw, 4rem);
+  padding: 1.1rem var(--gutter);
   border-block-end: 1px solid rgb(243 194 79 / 0.3);
 }
 
@@ -79,72 +117,103 @@
   text-decoration: underline;
 }
 
+.cinema-booking .cinema-booking__nav a[aria-current="page"] {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.45em;
+}
+
+.cinema-booking__tagline {
+  display: block;
+  color: var(--mute);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cinema-booking__hero {
+  border-block-end: 1px solid rgb(243 194 79 / 0.2);
+  background:
+    linear-gradient(180deg, transparent 60%, var(--velvet)),
+    radial-gradient(
+      50rem 26rem at 18% 30%,
+      rgb(217 128 90 / 0.22),
+      transparent 70%
+    ),
+    radial-gradient(
+      40rem 24rem at 90% 10%,
+      rgb(91 74 126 / 0.35),
+      transparent 70%
+    );
+}
+
 .cinema-booking__main {
   display: grid;
   grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
-  column-gap: clamp(2rem, 5vw, 4rem);
-  align-content: start;
-  max-inline-size: 72rem;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  max-inline-size: 76rem;
   margin-inline: auto;
-  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 4rem);
-}
-
-.cinema-booking__main > * {
-  grid-column: 2;
-}
-
-.cinema-booking__main > p {
-  max-inline-size: 38rem;
+  padding: clamp(2rem, 5vw, 4rem) var(--gutter);
 }
 
 /* Cartel de la película: un faro al atardecer. */
 .cinema-booking__poster {
-  position: relative;
-  grid-column: 1;
-  grid-row: 1 / span 4;
-  aspect-ratio: 2 / 3;
-  overflow: hidden;
+  position: sticky;
+  inset-block-start: 1.5rem;
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
   border-radius: 0.75rem;
-  background:
-    radial-gradient(circle at 68% 34%, #ffe9b0 0 7%, transparent 7.5%),
-    linear-gradient(
-      180deg,
-      #23355a 0%,
-      #6b4a7a 34%,
-      #e58b5a 56%,
-      #f6c66e 66%,
-      #1d5a72 66.5%,
-      #0f3346 100%
-    );
-  box-shadow: 0 24px 50px rgb(0 0 0 / 0.5);
+  box-shadow:
+    0 0 0 1px rgb(243 194 79 / 0.25),
+    0 24px 50px rgb(0 0 0 / 0.55);
 }
 
-.cinema-booking__poster::before {
-  content: "";
-  position: absolute;
-  inset-block-end: 30%;
-  inset-inline-start: 22%;
-  inline-size: 14%;
-  block-size: 42%;
-  background: linear-gradient(
-    180deg,
-    #f8efe1 0 22%,
-    #b3283f 22% 44%,
-    #f8efe1 44% 66%,
-    #b3283f 66% 100%
-  );
-  clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%);
+.cinema-booking__synopsis {
+  max-inline-size: 38rem;
+  margin-block: 0 1.5rem;
+  font-size: 1.25rem;
 }
 
-.cinema-booking__poster::after {
-  content: "";
-  position: absolute;
-  inset-block-end: 22%;
-  inset-inline-start: 6%;
-  inline-size: 46%;
-  block-size: 10%;
-  border-radius: 50% 50% 0 0;
-  background: #14222e;
+.cinema-booking__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.75rem 2rem;
+  max-inline-size: 42rem;
+  margin: 0 0 1.25rem;
+  padding-block: 1.25rem;
+  border-block: 1px solid rgb(243 194 79 / 0.2);
+  font-size: 1rem;
+}
+
+.cinema-booking__facts dt {
+  color: var(--mute);
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cinema-booking__facts dd {
+  margin: 0.1rem 0 0;
+  font-weight: 700;
+}
+
+.cinema-booking__access {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.cinema-booking__access span {
+  padding: 0.2rem 0.75rem;
+  border: 1px solid rgb(248 239 225 / 0.35);
+  border-radius: 999px;
 }
 
 .cinema-booking__meta {
@@ -239,16 +308,253 @@
   font-weight: 700;
 }
 
-.cinema-booking__footer {
-  padding: 1.5rem clamp(1rem, 5vw, 4rem);
-  border-block-start: 1px solid rgb(243 194 79 / 0.3);
+.cinema-booking__sessions-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  margin-block-end: 1.25rem;
+}
+
+.cinema-booking__sessions-head h2 {
+  margin: 0;
+}
+
+.cinema-booking__sessions-head p {
+  margin: 0;
+  color: var(--mute);
+  font-size: 1rem;
+}
+
+.cinema-booking__sessions-note {
+  margin: 1rem 0 0;
+  padding-block-start: 1rem;
+  border-block-start: 1px solid rgb(243 194 79 / 0.2);
   color: var(--mute);
   font-size: 0.9375rem;
-  text-align: center;
+}
+
+.cinema-booking__session:active:not(:disabled) {
+  transform: translateY(1px);
+  background: #e0ab33;
+}
+
+.cinema-booking__section-title,
+.cinema-booking__billboard h2,
+.cinema-booking__panel h2 {
+  margin-block: 0 1.5rem;
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+/* Resto de la cartelera: carteles en fila. */
+.cinema-booking__billboard {
+  max-inline-size: 76rem;
+  margin-inline: auto;
+  padding: clamp(2.5rem, 5vw, 4rem) var(--gutter);
+}
+
+.cinema-booking__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr));
+  gap: 2rem clamp(1rem, 2.5vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cinema-booking__card {
+  position: relative;
+}
+
+.cinema-booking__card-poster {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  margin-block-end: 0.9rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 14px 30px rgb(0 0 0 / 0.45);
+  transition: transform 0.2s ease;
+}
+
+.cinema-booking .cinema-booking__card a {
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Todo el cartel lleva a la ficha; el enlace sigue siendo solo el título. */
+.cinema-booking__card a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.6rem;
+}
+
+.cinema-booking .cinema-booking__card a:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+.cinema-booking__card:hover .cinema-booking__card-poster {
+  transform: translateY(-4px);
+}
+
+.cinema-booking__card a:focus-visible {
+  outline: none;
+}
+
+.cinema-booking__card a:focus-visible::after {
+  outline: 3px solid var(--gold);
+  outline-offset: 6px;
+}
+
+.cinema-booking__card p {
+  margin: 0.25rem 0 0;
+  color: var(--mute);
+  font-size: 0.9375rem;
+}
+
+.cinema-booking .cinema-booking__card-times {
+  color: var(--gold-soft);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema-booking__card-poster {
+    transition: none;
+  }
+
+  .cinema-booking__card:hover .cinema-booking__card-poster {
+    transform: none;
+  }
+}
+
+/* Tarifas y accesibilidad de las salas. */
+.cinema-booking__extra {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 1.5rem;
+  max-inline-size: 76rem;
+  margin-inline: auto;
+  padding: 0 var(--gutter) clamp(2.5rem, 5vw, 4rem);
+}
+
+.cinema-booking__panel {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid rgb(243 194 79 / 0.25);
+  border-radius: 1.25rem;
+  background: var(--velvet-soft);
+}
+
+.cinema-booking__panel p {
+  margin-block: 0 0.75rem;
+  color: var(--cream);
+}
+
+.cinema-booking__panel p:last-child {
+  margin-block-end: 0;
+}
+
+.cinema-booking__prices {
+  inline-size: 100%;
+  margin-block-end: 1.25rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.cinema-booking__prices th,
+.cinema-booking__prices td {
+  padding-block: 0.7rem;
+  border-block-end: 1px solid rgb(243 194 79 / 0.2);
+}
+
+.cinema-booking__prices th {
+  font-weight: 400;
+  text-align: start;
+}
+
+.cinema-booking__prices td {
+  color: var(--gold);
+  font-weight: 700;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.cinema-booking__footer {
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--gutter) 1.5rem;
+  border-block-start: 1px solid rgb(243 194 79 / 0.3);
+  background: #12080c;
+  color: var(--mute);
+  font-size: 0.9375rem;
+}
+
+.cinema-booking__footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 2rem;
+  max-inline-size: 76rem;
+  margin-inline: auto;
 }
 
 .cinema-booking__footer p {
-  margin: 0.15rem 0;
+  margin: 0 0 0.4rem;
+}
+
+.cinema-booking__footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.cinema-booking .cinema-booking__footer-title {
+  margin: 0 0 0.75rem;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cinema-booking__footer address {
+  margin-block-end: 0.5rem;
+  font-style: normal;
+}
+
+.cinema-booking__footer ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cinema-booking__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  max-inline-size: 76rem;
+  margin: 2.5rem auto 0;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid rgb(243 194 79 / 0.2);
+}
+
+.cinema-booking .cinema-booking__legal p {
+  margin: 0;
 }
 
 @media (max-width: 44rem) {
@@ -256,13 +562,8 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .cinema-booking__main > * {
-    grid-column: 1;
-  }
-
   .cinema-booking__poster {
-    grid-row: auto;
+    position: static;
     max-inline-size: 12rem;
-    margin-block-end: 1.5rem;
   }
 }

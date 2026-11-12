@@ -1,5 +1,6 @@
 import { useId } from 'react'
 import type { ExamplePageProps } from '../types'
+import { BowlThumb, StewPhoto } from './photos'
 import './recipe-page.css'
 
 const steps = [
@@ -9,6 +10,33 @@ const steps = [
   'Cuece 35 minutos y deja reposar antes de servir.',
 ]
 
+const related = [
+  {
+    name: 'Garbanzos con espinacas',
+    meta: '40 minutos · Fácil',
+    soup: '#b9853f',
+    bits: ['#e7c27a', '#3f6b2a', '#e7c27a'],
+  },
+  {
+    name: 'Crema de calabaza asada',
+    meta: '45 minutos · Fácil',
+    soup: '#e48a2c',
+    bits: ['#f7e7c6', '#6a4a2a'],
+  },
+  {
+    name: 'Sopa castellana',
+    meta: '30 minutos · Fácil',
+    soup: '#a5532a',
+    bits: ['#e9c98f', '#f4e9cf', '#5d7a2c'],
+  },
+  {
+    name: 'Alubias blancas con verduras',
+    meta: '1 hora · Media',
+    soup: '#c9a26b',
+    bits: ['#f4ead6', '#e2792b', '#4f6b2a'],
+  },
+]
+
 /** Receta de un blog: estructura, regiones y orden del documento. */
 export function RecipePage({ fixed }: ExamplePageProps) {
   const id = useId()
@@ -16,76 +44,47 @@ export function RecipePage({ fixed }: ExamplePageProps) {
   const Header = fixed ? 'header' : 'div'
   const Nav = fixed ? 'nav' : 'div'
   const Main = fixed ? 'main' : 'div'
+  const Aside = fixed ? 'aside' : 'div'
   const Footer = fixed ? 'footer' : 'div'
   const H1 = fixed ? 'h1' : 'div'
   const H2 = fixed ? 'h2' : 'div'
   const H3 = fixed ? 'h3' : 'div'
+  const label = (name: string) => (fixed ? { 'aria-label': name } : {})
 
   return (
     <div className="recipe-page">
       <Header className="recipe-page__header" data-fix="landmarks">
-        <p className="recipe-page__brand">La Cuchara Lenta</p>
-        <Nav
-          className="recipe-page__nav"
-          {...(fixed ? { 'aria-label': 'Principal' } : {})}
-        >
-          <a href={`#${id}-recipe`}>Recetas</a>
-          <a href={`#${id}-ingredients`}>Ingredientes</a>
-          <a href={`#${id}-steps`}>Preparación</a>
-        </Nav>
+        <p className="recipe-page__topline">
+          Recetas de casa, de temporada y sin prisas
+        </p>
+        <div className="recipe-page__bar">
+          <p className="recipe-page__brand">
+            <span aria-hidden="true" className="recipe-page__logo" />
+            La Cuchara Lenta
+          </p>
+          <Nav className="recipe-page__nav" {...label('Principal')}>
+            <a href={`#${id}-recipe`}>Recetas</a>
+            <a href={`#${id}-ingredients`}>Ingredientes</a>
+            <a href={`#${id}-steps`}>Preparación</a>
+            <a href={`#${id}-more`}>De cuchara</a>
+            <a href={`#${id}-more`}>Menú semanal</a>
+            <a href={`#${id}-about`}>Sobre Marta</a>
+          </Nav>
+        </div>
       </Header>
       <Main
         id={`${id}-recipe`}
         className="recipe-page__main"
         data-fix="landmarks"
       >
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          className="recipe-page__photo"
-          viewBox="0 0 400 300"
-        >
-          <rect width="400" height="300" fill="#e9dcc3" />
-          <path d="M0 210h400v90H0z" fill="#d9c7a6" />
-          <ellipse cx="200" cy="236" rx="150" ry="20" fill="#bfa67c" />
-          <path
-            d="M70 130h260c0 70-55 112-130 112S70 200 70 130z"
-            fill="#f6efe2"
-          />
-          <ellipse cx="200" cy="130" rx="130" ry="30" fill="#fffaf0" />
-          <ellipse cx="200" cy="132" rx="114" ry="23" fill="#7a4a24" />
-          <g fill="#a36a35">
-            <circle cx="140" cy="130" r="7" />
-            <circle cx="165" cy="140" r="7" />
-            <circle cx="190" cy="126" r="7" />
-            <circle cx="225" cy="141" r="7" />
-            <circle cx="250" cy="128" r="7" />
-            <circle cx="272" cy="137" r="6" />
-            <circle cx="118" cy="136" r="6" />
-            <circle cx="208" cy="146" r="6" />
-          </g>
-          <g fill="#e2792b">
-            <circle cx="158" cy="124" r="8" />
-            <circle cx="238" cy="134" r="8" />
-            <circle cx="205" cy="118" r="7" />
-          </g>
-          <g fill="#6f8f3a">
-            <rect x="176" y="132" width="16" height="7" rx="3" />
-            <rect x="258" y="122" width="14" height="7" rx="3" />
-            <rect x="128" y="122" width="14" height="6" rx="3" />
-          </g>
-          <g
-            fill="none"
-            stroke="#fffaf0"
-            strokeWidth="6"
-            strokeLinecap="round"
-            opacity="0.7"
-          >
-            <path d="M160 86c-12-18 12-26 0-46" />
-            <path d="M200 80c-12-18 12-26 0-46" />
-            <path d="M240 86c-12-18 12-26 0-46" />
-          </g>
-        </svg>
+        <Nav className="recipe-page__crumbs" {...label('Migas de pan')}>
+          <a href={`#${id}-recipe`}>Inicio</a>
+          <span aria-hidden="true">›</span>
+          <a href={`#${id}-more`}>Platos de cuchara</a>
+          <span aria-hidden="true">›</span>
+          <span>Lentejas estofadas</span>
+        </Nav>
+        <StewPhoto />
         <p className="recipe-page__meta">Cuchara · 4 raciones · 50 minutos</p>
         <H1 className="recipe-page__title" data-fix="headings">
           Lentejas estofadas con verduras
@@ -94,6 +93,34 @@ export function RecipePage({ fixed }: ExamplePageProps) {
           Un guiso de diario que mejora de un día para otro. Sin carne y con
           verduras de temporada.
         </p>
+        <p className="recipe-page__byline">
+          <span aria-hidden="true" className="recipe-page__avatar" />
+          <span>
+            Por <strong>Marta Ribas</strong> · Actualizada el 3 de noviembre de
+            2026
+          </span>
+          <span className="recipe-page__rating">
+            <span aria-hidden="true">★★★★★</span> 4,9 de 5 · 212 valoraciones
+          </span>
+        </p>
+        <dl className="recipe-page__facts">
+          <div>
+            <dt>Preparación</dt>
+            <dd>15 min</dd>
+          </div>
+          <div>
+            <dt>Cocción</dt>
+            <dd>35 min</dd>
+          </div>
+          <div>
+            <dt>Raciones</dt>
+            <dd>4</dd>
+          </div>
+          <div>
+            <dt>Dificultad</dt>
+            <dd>Fácil</dd>
+          </div>
+        </dl>
         <H2
           id={`${id}-ingredients`}
           className="recipe-page__heading"
@@ -101,6 +128,9 @@ export function RecipePage({ fixed }: ExamplePageProps) {
         >
           Ingredientes
         </H2>
+        <p className="recipe-page__note">
+          Para 4 raciones. Las pardinas no necesitan remojo.
+        </p>
         <H3 className="recipe-page__subheading" data-fix="headings">
           Para el sofrito
         </H3>
@@ -151,9 +181,66 @@ export function RecipePage({ fixed }: ExamplePageProps) {
         <p className="recipe-page__tip">
           Si quedan espesas, añade un poco de agua caliente al recalentar.
         </p>
+        <p>
+          Se conservan cuatro días en la nevera y se congelan muy bien en
+          raciones. Si te gustan con un punto ácido, añade un chorrito de
+          vinagre de Jerez justo antes de servir.
+        </p>
       </Main>
-      <Footer className="recipe-page__footer" data-fix="landmarks">
-        <p>La Cuchara Lenta · Recetas de casa desde 2014</p>
+      <Aside
+        id={`${id}-more`}
+        className="recipe-page__more"
+        {...label('Más recetas de cuchara')}
+      >
+        <p className="recipe-page__more-intro">
+          ¿Te han gustado? Más recetas de cuchara para esta semana
+        </p>
+        <ul className="recipe-page__cards">
+          {related.map(({ name, meta, soup, bits }) => (
+            <li key={name} className="recipe-page__card">
+              <BowlThumb soup={soup} bits={bits} />
+              <a href={`#${id}-more`}>{name}</a>
+              <p>{meta}</p>
+            </li>
+          ))}
+        </ul>
+      </Aside>
+      <Footer
+        id={`${id}-about`}
+        className="recipe-page__footer"
+        data-fix="landmarks"
+      >
+        <div className="recipe-page__footer-grid">
+          <div className="recipe-page__footer-about">
+            <p className="recipe-page__footer-brand">La Cuchara Lenta</p>
+            <p>
+              Soy Marta y cocino como en casa de mis abuelos, en Palencia:
+              legumbre los lunes, verdura de la huerta y nada de prisas.
+            </p>
+          </div>
+          <ul className="recipe-page__footer-links">
+            <li>
+              <a href={`#${id}-more`}>Todas las recetas</a>
+            </li>
+            <li>
+              <a href={`#${id}-more`}>Menú semanal</a>
+            </li>
+            <li>
+              <a href={`#${id}-about`}>Sobre Marta</a>
+            </li>
+            <li>
+              <a href={`#${id}-about`}>Contacto</a>
+            </li>
+          </ul>
+          <p className="recipe-page__footer-news">
+            Cada domingo, el menú de la semana en tu correo.{' '}
+            <a href={`#${id}-about`}>Apúntate al menú semanal</a>
+          </p>
+        </div>
+        <div className="recipe-page__legal">
+          <p>La Cuchara Lenta · Recetas de casa desde 2014</p>
+          <p>Blog de demostración · Aviso legal · Privacidad</p>
+        </div>
       </Footer>
     </div>
   )
