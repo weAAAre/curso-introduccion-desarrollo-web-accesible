@@ -1,29 +1,36 @@
-/* Museo textil con el lenguaje visual de weAAAre. */
+/* Museo de Arte Textil: galería sobria. Lino, verde botella e hilo de oro. */
 .museum-exhibition {
-  --page-accent: var(--color-surface);
-  --page-tint: var(--color-surface);
+  --linen: #f3eee5;
+  --linen-light: #faf7f1;
+  --bottle: #1f3d33;
+  --bottle-deep: #152b24;
+  --gold: #e9c46a;
+  --gold-ink: #8a5a1c;
+  --ink: #1d1f1c;
+  --ink-soft: #5a5d55;
+  --line: #ddd4c4;
 
   min-block-size: 100vh;
-  background: var(--page-tint);
-  color: var(--color-ink);
+  background: var(--linen);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.6;
 }
 
 .museum-exhibition a {
-  color: var(--color-ink);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
+  color: var(--bottle);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
 }
 
 .museum-exhibition a:hover {
-  background: var(--color-accent);
+  text-decoration-thickness: 2px;
 }
 
 .museum-exhibition :focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-offset);
+  outline: 3px solid var(--bottle);
+  outline-offset: 3px;
 }
 
 .museum-exhibition__header {
@@ -31,81 +38,207 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-end: var(--border);
-  background: var(--color-surface);
+  gap: 1rem 2.5rem;
+  padding: 1.25rem clamp(1rem, 5vw, 4rem);
+  border-block-start: 4px solid var(--bottle);
+  border-block-end: 1px solid var(--line);
+  background: var(--linen-light);
 }
 
 .museum-exhibition__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
   margin: 0;
-  font-family: var(--font-body);
-  font-size: 1.5rem;
+  color: var(--bottle);
+  font-size: 1.0625rem;
   font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Marca: un cuadro de tejido, trama verde y urdimbre dorada. */
+.museum-exhibition__logo {
+  flex: none;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 0.3rem;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--gold) 0 0.25rem,
+      transparent 0.25rem 0.5rem
+    ),
+    repeating-linear-gradient(
+      0deg,
+      var(--bottle) 0 0.25rem,
+      #3f6b5b 0.25rem 0.5rem
+    );
 }
 
 .museum-exhibition__nav {
   display: flex;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 2rem;
+}
+
+.museum-exhibition .museum-exhibition__nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.museum-exhibition .museum-exhibition__nav a:hover {
+  color: var(--bottle);
+  text-decoration: underline;
 }
 
 .museum-exhibition__main {
-  max-inline-size: 48rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 clamp(2rem, 5vw, 5rem);
+  max-inline-size: 78rem;
   margin-inline: auto;
-  padding: 2.5rem clamp(1rem, 4vw, 3rem);
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 5vw, 4rem) 5rem;
+}
+
+@media (min-width: 60rem) {
+  .museum-exhibition__main {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .museum-exhibition__hero,
+  .museum-exhibition__image {
+    grid-column: 1 / -1;
+  }
+}
+
+.museum-exhibition__hero {
+  max-inline-size: 52rem;
 }
 
 .museum-exhibition__kicker {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
   margin: 0;
-  padding: 0.05rem 0.75rem;
-  border: var(--border);
-  border-radius: var(--radius-pill);
-  background: var(--page-accent);
-  font-size: 0.875rem;
+  color: var(--gold-ink);
+  font-size: 0.9375rem;
   font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.museum-exhibition__kicker::before {
+  content: "";
+  inline-size: 2.5rem;
+  block-size: 2px;
+  background: currentcolor;
 }
 
 .museum-exhibition h1 {
+  margin: 0.75rem 0 1rem;
+  color: var(--bottle);
   font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
-  font-weight: 500;
+  font-variation-settings:
+    "SOFT" 50,
+    "WONK" 1,
+    "opsz" 144;
+  font-size: clamp(2.75rem, 1.5rem + 5vw, 5.75rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
 }
 
-.museum-exhibition__section {
-  font-family: var(--font-body);
-  font-weight: 700;
-}
-
-.museum-exhibition h1 {
-  margin: 0.75rem 0 1.5rem;
-  font-size: clamp(2.1875rem, 5vw, 3.4375rem);
-  line-height: 1.08;
+.museum-exhibition__dates {
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  color: var(--ink-soft);
+  font-size: 1.1875rem;
 }
 
 .museum-exhibition__image {
   display: block;
   inline-size: 100%;
-  border: var(--border);
-  border-radius: var(--radius-lg);
+  margin-block-end: clamp(2.5rem, 5vw, 4rem);
+  border-radius: 1rem;
+  background: #e9dcc3;
+  box-shadow:
+    0 1px 2px rgb(21 43 36 / 0.08),
+    0 18px 40px rgb(21 43 36 / 0.12);
 }
 
 /* El tamaño viene de la clase, no del nivel: ambas versiones se ven igual. */
 .museum-exhibition__section {
-  margin: 2.25rem 0 0.5rem;
-  font-size: 1.75rem;
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.museum-exhibition__about p {
+  max-inline-size: 38rem;
+  margin-block: 0 1.25rem;
+}
+
+.museum-exhibition__about p:first-of-type {
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.375rem;
+  line-height: 1.5;
+}
+
+/* Información práctica: tarjeta verde con los datos de la visita. */
+.museum-exhibition__visit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 1.25rem 2rem;
+  margin-block-start: 2.5rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 1.25rem;
+  background: var(--bottle);
+  color: var(--linen);
+}
+
+@media (min-width: 60rem) {
+  .museum-exhibition__visit {
+    margin-block-start: 0;
+  }
+}
+
+.museum-exhibition__visit .museum-exhibition__section {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #fff;
+}
+
+.museum-exhibition__info {
+  padding-block-start: 1rem;
+  border-block-start: 1px solid rgb(243 238 229 / 0.3);
 }
 
 .museum-exhibition__subsection {
-  margin: 1rem 0 0.25rem;
-  font-size: 1.125rem;
+  margin: 0 0 0.25rem;
+  color: var(--gold);
+  font-size: 0.9375rem;
   font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.museum-exhibition__info p {
+  margin: 0;
 }
 
 .museum-exhibition__footer {
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-start: var(--border);
-  color: var(--color-ink-soft);
-  font-size: 0.875rem;
+  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  background: var(--bottle-deep);
+  color: #d8cfbf;
+  font-size: 0.9375rem;
   text-align: center;
+}
+
+.museum-exhibition__footer p {
+  margin: 0;
 }

@@ -31,7 +31,10 @@ export function LibraryLogin({ fixed }: ExamplePageProps) {
   return (
     <div className={`library-login${fixed ? '' : ' library-login--no-focus'}`}>
       <header className="library-login__header" data-fix="obscured">
-        <p className="library-login__brand">Biblioteca Municipal</p>
+        <p className="library-login__brand">
+          <span aria-hidden="true" className="library-login__logo" />
+          Biblioteca Municipal
+        </p>
         <nav aria-label="Principal" className="library-login__nav">
           <a href={`#${id}-news`}>Catálogo</a>
           <a href={`#${id}-login`}>Mi cuenta</a>
@@ -45,7 +48,10 @@ export function LibraryLogin({ fixed }: ExamplePageProps) {
           className="library-login__card"
         >
           <h1 id={`${id}-login-title`}>Accede a tu cuenta</h1>
-          <p>Renueva préstamos y reserva libros con tu carné.</p>
+          <p className="library-login__intro">
+            Renueva préstamos y reserva libros con tu carné.
+          </p>
+          <span aria-hidden="true" className="library-login__shelf" />
           <form className="library-login__form" onSubmit={submit}>
             <div className="library-login__field">
               <label htmlFor={`${id}-card`}>Número de carné</label>
@@ -81,7 +87,11 @@ export function LibraryLogin({ fixed }: ExamplePageProps) {
             <a href={`#${id}-hours`}>Hazte socio o socia</a>
           </p>
         </section>
-        <section id={`${id}-news`} aria-labelledby={`${id}-news-title`}>
+        <section
+          id={`${id}-news`}
+          aria-labelledby={`${id}-news-title`}
+          className="library-login__news"
+        >
           <h2 id={`${id}-news-title`}>Novedades del catálogo</h2>
           <ul className="library-login__books">
             {books.map((book) => (
@@ -91,7 +101,11 @@ export function LibraryLogin({ fixed }: ExamplePageProps) {
             ))}
           </ul>
         </section>
-        <section id={`${id}-hours`} aria-labelledby={`${id}-hours-title`}>
+        <section
+          id={`${id}-hours`}
+          aria-labelledby={`${id}-hours-title`}
+          className="library-login__hours"
+        >
           <h2 id={`${id}-hours-title`}>Horarios</h2>
           <p>De lunes a viernes, de 9:00 a 20:30. Sábados, de 10:00 a 14:00.</p>
           <p>

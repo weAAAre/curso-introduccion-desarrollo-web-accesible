@@ -1,29 +1,33 @@
-/* Blog de recetas con el lenguaje visual de weAAAre. */
+/* La Cuchara Lenta: blog de cocina casera. Blanco roto, tomate y oliva. */
 .recipe-page {
-  --page-accent: var(--color-surface);
-  --page-tint: var(--color-surface);
+  --tomato: #ab3519;
+  --olive: #4f6128;
+  --olive-tint: #eef0dc;
+  --flour: #fffaf2;
+  --crust: #2b241f;
+  --crust-soft: #655a51;
+  --line: #e6dccb;
 
   min-block-size: 100vh;
-  background: var(--page-tint);
-  color: var(--color-ink);
+  background: var(--flour);
+  color: var(--crust);
   font-family: var(--font-body);
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   line-height: 1.6;
 }
 
 .recipe-page a {
-  color: var(--color-ink);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
+  color: var(--crust);
+  text-underline-offset: 0.25em;
 }
 
 .recipe-page a:hover {
-  background: var(--color-accent);
+  color: var(--tomato);
 }
 
 .recipe-page :focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-offset);
+  outline: 3px solid var(--tomato);
+  outline-offset: 3px;
 }
 
 .recipe-page__header {
@@ -32,84 +36,126 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-end: var(--border);
-  background: var(--page-accent);
-}
-
-/* En la cabecera, el anillo de foco se dibuja en tinta. */
-.recipe-page__header :focus-visible {
-  outline-color: var(--color-ink);
+  padding: 1.25rem clamp(1rem, 5vw, 4rem);
+  border-block-end: 1px solid var(--line);
+  background: #fff;
 }
 
 .recipe-page__brand {
   margin: 0;
-  font-family: var(--font-body);
-  font-size: 1.5rem;
+  color: var(--tomato);
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.75rem;
   font-style: italic;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .recipe-page__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 1.75rem;
+}
+
+.recipe-page .recipe-page__nav a {
+  text-decoration: none;
+}
+
+.recipe-page .recipe-page__nav a:hover {
+  text-decoration: underline;
 }
 
 .recipe-page__main {
-  max-inline-size: 42rem;
+  max-inline-size: 58rem;
   margin-inline: auto;
-  padding: 2.5rem clamp(1rem, 4vw, 3rem);
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 5vw, 4rem) 4rem;
+}
+
+.recipe-page__main > p,
+.recipe-page__main > ul {
+  max-inline-size: 40rem;
+}
+
+.recipe-page__photo {
+  display: block;
+  inline-size: 100%;
+  block-size: clamp(14rem, 34vw, 24rem);
+  margin-block-end: 2rem;
+  border-radius: 1.5rem;
+  background: #e9dcc3;
 }
 
 .recipe-page__meta {
-  display: inline-block;
   margin: 0;
-  padding: 0.05rem 0.7rem;
-  border: var(--border);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  font-size: 0.875rem;
+  color: var(--olive);
+  font-size: 1rem;
   font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .recipe-page__title {
+  margin: 0.5rem 0 1rem;
   font-family: var(--font-display);
   font-variation-settings: var(--font-display-settings);
+  font-size: clamp(2.5rem, 1.5rem + 3.6vw, 4.25rem);
   font-weight: 500;
+  line-height: 1.05;
+}
+
+.recipe-page__title + p {
+  color: var(--crust-soft);
+  font-size: 1.375rem;
 }
 
 .recipe-page__heading {
-  font-family: var(--font-body);
-  font-weight: 700;
-}
-
-.recipe-page__title {
-  margin: 0.75rem 0 1rem;
-  font-size: clamp(2.1875rem, 5vw, 2.75rem);
-  line-height: 1.1;
-}
-
-.recipe-page__heading {
-  margin: 2.25rem 0 0.75rem;
-  padding-block-end: 0.25rem;
-  border-block-end: var(--border);
-  font-size: 1.75rem;
+  margin: 3rem 0 1rem;
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 2.125rem;
+  font-weight: 500;
+  line-height: 1.15;
 }
 
 .recipe-page__subheading {
-  margin: 1rem 0 0.25rem;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--olive);
   font-size: 1.125rem;
   font-weight: 700;
 }
 
+.recipe-page__main > ul {
+  margin: 0;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  background: var(--olive-tint);
+  list-style: none;
+}
+
+.recipe-page__main > ul :where(li) {
+  padding-block: 0.5rem;
+}
+
+.recipe-page__main > ul :where(li + li) {
+  border-block-start: 1px solid #d9dcbd;
+}
+
 .recipe-page__steps {
-  padding-inline-start: 1.5rem;
+  max-inline-size: 44rem;
+  margin: 0;
+  padding-inline-start: 1.75rem;
 }
 
 .recipe-page__steps li,
 .recipe-page__steps p {
-  margin-block: 0.5rem;
+  margin-block: 0;
+  padding-block: 0.9rem;
+  border-block-end: 1px solid var(--line);
+}
+
+.recipe-page__steps li::marker {
+  color: var(--tomato);
+  font-weight: 700;
 }
 
 /* Barrera deliberada: column-reverse corrige el aspecto, no el orden del documento. */
@@ -119,10 +165,22 @@
   padding-inline-start: 0;
 }
 
+.recipe-page__main > .recipe-page__tip {
+  max-inline-size: 40rem;
+  padding: 1.25rem 1.5rem;
+  border-inline-start: 4px solid var(--tomato);
+  border-radius: 0 1rem 1rem 0;
+  background: #fff;
+}
+
 .recipe-page__footer {
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-start: var(--border);
-  color: var(--color-ink-soft);
-  font-size: 0.875rem;
+  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  background: var(--crust);
+  color: #eadfce;
+  font-size: 0.9375rem;
   text-align: center;
+}
+
+.recipe-page__footer p {
+  margin: 0;
 }

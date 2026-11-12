@@ -1,27 +1,48 @@
-/* Autobuses urbanos con el lenguaje visual de weAAAre. */
+/*
+ * Autobuses Ría: transporte urbano. Azul marino, cian de línea y tarjetas
+ * blancas sobre un fondo azul niebla. Los tamaños de texto van en em para que
+ * todo dependa del tamaño de la raíz: en el arreglo, 1rem; en la barrera, px.
+ */
 .bus-timetable {
-  --page-accent: var(--color-surface);
+  --navy: #0b2e4f;
+  --navy-deep: #071f36;
+  --blue: #0b5c8e;
+  --cyan: #19b3d1;
+  --cyan-light: #5fd3ea;
+  --mist: #eaf1f6;
+  --ink: #14202b;
+  --ink-soft: #52525b;
+  --line: #d5e1ea;
+  --warning: #e8590c;
 
   min-block-size: 100vh;
-  background: var(--color-surface);
-  color: var(--color-ink);
+  background: var(--mist);
+  color: var(--ink);
   font-family: var(--font-body);
+  font-size: 1rem;
   line-height: 1.6;
 }
 
 .bus-timetable a {
-  color: var(--color-ink);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
 }
 
 .bus-timetable a:hover {
-  background: var(--color-accent);
+  color: var(--navy);
+  text-decoration-thickness: 2px;
 }
 
 .bus-timetable :focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-offset);
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
+}
+
+/* En la cabecera azul, el anillo se dibuja en cian claro (7,90:1). */
+.bus-timetable__header :focus-visible {
+  outline-color: var(--cyan-light);
 }
 
 .bus-timetable__header {
@@ -29,77 +50,161 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-end: var(--border);
-  background: var(--page-accent);
-}
-
-/* En la cabecera, el anillo de foco se dibuja en tinta. */
-.bus-timetable__header :focus-visible {
-  outline-color: var(--color-ink);
+  gap: 0.75rem 2rem;
+  padding: 1em clamp(1rem, 5vw, 4rem);
+  background: var(--navy);
+  color: #fff;
 }
 
 .bus-timetable__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   margin: 0;
-  font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: 1.5em;
   font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Marca: frontal de autobús con parabrisas y faros. */
+.bus-timetable__logo {
+  position: relative;
+  flex: none;
+  inline-size: 1.6em;
+  block-size: 1.6em;
+  border-radius: 0.45em 0.45em 0.3em 0.3em;
+  background:
+    radial-gradient(circle at 24% 80%, var(--navy) 0 0.09em, transparent 0.1em),
+    radial-gradient(circle at 76% 80%, var(--navy) 0 0.09em, transparent 0.1em),
+    linear-gradient(#fff, #fff) 50% 22% / 72% 38% no-repeat,
+    var(--cyan);
 }
 
 .bus-timetable__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 0.25rem 1.75rem;
+}
+
+.bus-timetable .bus-timetable__nav a {
+  color: #fff;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.bus-timetable .bus-timetable__nav a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .bus-timetable__main {
-  max-inline-size: 44rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  max-inline-size: 76rem;
   margin-inline: auto;
-  padding: 2.5rem clamp(1rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 5vw, 4rem) 4rem;
+}
+
+@media (min-width: 64rem) {
+  .bus-timetable__main {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+  }
+
+  .bus-timetable__hero,
+  .bus-timetable__board {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Cabecera de la línea: distintivo de color, destino y parada. */
+.bus-timetable__hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.25rem 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgb(11 46 79 / 0.06),
+    0 10px 30px rgb(11 46 79 / 0.07);
 }
 
 .bus-timetable__line {
-  display: inline-grid;
+  grid-row: 1 / span 2;
+  display: grid;
   place-items: center;
-  inline-size: 3rem;
-  block-size: 3rem;
+  inline-size: 2.4em;
+  block-size: 2.4em;
   margin: 0;
-  border: var(--border);
-  border-radius: var(--radius-md);
-  background: var(--page-accent);
-  font-size: 1.5rem;
+  border-radius: 0.6em;
+  background: var(--cyan);
+  color: var(--navy);
+  font-size: 1.75em;
   font-weight: 700;
+  line-height: 1;
 }
 
 .bus-timetable h1 {
-  font-family: var(--font-display);
-  font-variation-settings: var(--font-display-settings);
-  font-weight: 500;
-}
-
-.bus-timetable h2 {
+  margin: 0;
   font-family: var(--font-body);
+  font-size: clamp(1.875rem, 1.2rem + 2vw, 3rem);
   font-weight: 700;
-}
-
-.bus-timetable h1 {
-  margin: 1rem 0 0.25rem;
-  font-size: clamp(1.75rem, 1rem + 2vw, 2.75rem);
-  line-height: 1.15;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
 .bus-timetable__stop {
-  margin-block-start: 0;
-  color: var(--color-ink-soft);
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1.0625em;
+}
+
+/* Recorrido decorativo: paradas de la línea con la actual destacada. */
+.bus-timetable__route {
+  grid-column: 1 / -1;
+  display: block;
+  block-size: 1.5rem;
+  margin-block-start: 1.25rem;
+  background:
+    radial-gradient(circle, var(--cyan) 0 0.3rem, transparent 0.32rem) 0 50% /
+    1.5rem 1.5rem no-repeat,
+    radial-gradient(circle, var(--cyan) 0 0.3rem, transparent 0.32rem) 25% 50% /
+    1.5rem 1.5rem no-repeat,
+    radial-gradient(
+      circle,
+      #fff 0 0.28rem,
+      var(--navy) 0.3rem 0.62rem,
+      transparent 0.64rem
+    )
+    50% 50% / 1.5rem 1.5rem no-repeat,
+    radial-gradient(circle, var(--cyan) 0 0.3rem, transparent 0.32rem) 75% 50% /
+    1.5rem 1.5rem no-repeat,
+    radial-gradient(circle, var(--cyan) 0 0.3rem, transparent 0.32rem) 100% 50%
+    / 1.5rem 1.5rem no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) 50% 50% / calc(100% - 1.5rem)
+    0.25rem no-repeat;
 }
 
 .bus-timetable h2 {
-  margin-block: 2rem 0.5rem;
-  font-size: 1.75rem;
+  margin: 0 0 0.75rem;
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Panel de salidas: una tarjeta por autobús. */
+.bus-timetable__board {
+  margin-block-start: 1rem;
 }
 
 .bus-timetable__departures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -109,15 +214,17 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem 1rem;
-  padding-block: 0.75rem;
-  border-block-end: 1px solid var(--color-rule-soft);
+  gap: 0.35rem 0.85rem;
+  padding: 1.1rem 1.35rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(11 46 79 / 0.06);
 }
 
 .bus-timetable__dot {
   flex: none;
-  inline-size: 1rem;
-  block-size: 1rem;
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
   border-radius: 50%;
 }
 
@@ -134,65 +241,99 @@
 }
 
 .bus-timetable__time {
-  font-size: 1.25rem;
+  font-size: 2em;
   font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.bus-timetable__state {
+  flex-basis: 100%;
   font-weight: 700;
 }
 
-/* Aviso de weAAAre: borde de tinta, sin sombra. */
+/* Aviso: tarjeta blanca con franja de advertencia. */
 .bus-timetable__notice {
-  margin-block: 2rem;
-  padding: 1rem 1.25rem;
-  border: var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  position: relative;
+  padding: 1em 1.25em 1em 1.6em;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(11 46 79 / 0.06);
   overflow-wrap: anywhere;
 }
 
-.bus-timetable__notice h2 {
-  margin-block-start: 0;
+.bus-timetable__notice::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 0.4rem;
+  border-radius: 1rem 0 0 1rem;
+  background: var(--warning);
+}
+
+.bus-timetable .bus-timetable__notice h2 {
+  margin-block-end: 0.25rem;
+  font-size: 1.125em;
 }
 
 .bus-timetable__notice-text {
-  margin-block-end: 0;
+  margin: 0;
+  line-height: 1.5;
 }
 
-.bus-timetable__buy {
-  display: inline-block;
-  padding: 0.6rem 1.25rem;
-  border: var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-ink);
-  box-shadow:
-    0 4px 0 0 var(--page-accent),
-    0 4px 0 2px var(--color-ink);
-  font-weight: 700;
+.bus-timetable__tickets {
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-radius: 1rem;
+  background: var(--navy);
+  color: #fff;
+}
+
+.bus-timetable__tickets :focus-visible {
+  outline-color: var(--cyan-light);
+}
+
+.bus-timetable .bus-timetable__tickets h2 {
+  font-size: 1.25em;
+}
+
+.bus-timetable__tickets p {
+  margin-block: 0 1.25rem;
+  color: #dbe7f0;
 }
 
 .bus-timetable .bus-timetable__buy {
-  color: var(--color-paper);
+  display: inline-block;
+  padding: 0.7em 1.4em;
+  border-radius: 999px;
+  background: var(--cyan);
+  color: var(--navy);
+  line-height: 1.3;
   text-decoration: none;
 }
 
 .bus-timetable .bus-timetable__buy:hover {
-  background: var(--color-ink);
-  transform: translateY(2px);
-  box-shadow:
-    0 2px 0 0 var(--page-accent),
-    0 2px 0 2px var(--color-ink);
+  background: var(--cyan-light);
+  color: var(--navy);
 }
 
 .bus-timetable__footer {
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-start: var(--border);
-  color: var(--color-ink-soft);
-  font-size: 0.875rem;
+  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  background: var(--navy-deep);
+  color: #c7d9e6;
+  font-size: 0.9375em;
   text-align: center;
 }
 
+.bus-timetable__footer p {
+  margin: 0;
+}
+
 /*
- * Barreras deliberadas: texto gris claro, letra en px y vw que ignora el
- * tamaño de letra elegido por la persona, y un aviso rígido que recorta.
+ * Barreras deliberadas: texto gris claro (#b4b4b4 sobre blanco, 2,07:1), letra
+ * en px y vw que ignora el tamaño de letra elegido por la persona, y un aviso
+ * rígido que recorta.
  */
 .bus-timetable--barrier {
   font-size: 15px;
@@ -203,7 +344,7 @@
 }
 
 .bus-timetable--barrier .bus-timetable__time {
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .bus-timetable--barrier .bus-timetable__stop,

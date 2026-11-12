@@ -19,7 +19,10 @@ export function CinemaBooking({ fixed }: ExamplePageProps) {
   return (
     <div className="cinema-booking">
       <header className="cinema-booking__header">
-        <p className="cinema-booking__brand">Cine Alameda</p>
+        <p className="cinema-booking__brand">
+          <span aria-hidden="true" className="cinema-booking__logo" />
+          Cine Alameda
+        </p>
         <nav aria-label="Principal" className="cinema-booking__nav">
           <a href={`#${id}-film`}>Cartelera</a>
           <a href={`#${id}-sessions`}>Entradas</a>
@@ -27,6 +30,7 @@ export function CinemaBooking({ fixed }: ExamplePageProps) {
         </nav>
       </header>
       <main id={`${id}-film`} className="cinema-booking__main">
+        <span aria-hidden="true" className="cinema-booking__poster" />
         <p className="cinema-booking__meta">Drama · 1 h 52 min · VOSE</p>
         <h1>La ola tranquila</h1>
         <p>

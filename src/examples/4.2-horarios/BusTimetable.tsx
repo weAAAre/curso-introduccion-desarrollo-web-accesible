@@ -15,7 +15,10 @@ export function BusTimetable({ fixed }: ExamplePageProps) {
   return (
     <div className={`bus-timetable${fixed ? '' : ' bus-timetable--barrier'}`}>
       <header className="bus-timetable__header">
-        <p className="bus-timetable__brand">Autobuses Ría</p>
+        <p className="bus-timetable__brand">
+          <span aria-hidden="true" className="bus-timetable__logo" />
+          Autobuses Ría
+        </p>
         <nav aria-label="Principal" className="bus-timetable__nav">
           <a href={`#${id}-line`}>Líneas</a>
           <a href={`#${id}-notice`}>Avisos</a>
@@ -23,30 +26,35 @@ export function BusTimetable({ fixed }: ExamplePageProps) {
         </nav>
       </header>
       <main id={`${id}-line`} className="bus-timetable__main">
-        <p className="bus-timetable__line" aria-hidden="true">
-          7
-        </p>
-        <h1 data-fix="font-size">Línea 7 · Estación – Hospital</h1>
-        <p className="bus-timetable__stop" data-fix="contrast">
-          Parada Plaza Mayor · actualizado hace 1 minuto
-        </p>
-        <h2 id={`${id}-departures`}>Próximas salidas</h2>
-        <ul
-          aria-labelledby={`${id}-departures`}
-          className="bus-timetable__departures"
-          data-fix="color"
-        >
-          {departures.map(({ time, state, label }) => (
-            <li key={time} className="bus-timetable__departure">
-              <span
-                aria-hidden="true"
-                className={`bus-timetable__dot bus-timetable__dot--${state}`}
-              />
-              <span className="bus-timetable__time">{time}</span>
-              {fixed && <span className="bus-timetable__state">{label}</span>}
-            </li>
-          ))}
-        </ul>
+        <div className="bus-timetable__hero">
+          <p className="bus-timetable__line" aria-hidden="true">
+            7
+          </p>
+          <h1 data-fix="font-size">Línea 7 · Estación – Hospital</h1>
+          <p className="bus-timetable__stop" data-fix="contrast">
+            Parada Plaza Mayor · actualizado hace 1 minuto
+          </p>
+          <span aria-hidden="true" className="bus-timetable__route" />
+        </div>
+        <div className="bus-timetable__board">
+          <h2 id={`${id}-departures`}>Próximas salidas</h2>
+          <ul
+            aria-labelledby={`${id}-departures`}
+            className="bus-timetable__departures"
+            data-fix="color"
+          >
+            {departures.map(({ time, state, label }) => (
+              <li key={time} className="bus-timetable__departure">
+                <span
+                  aria-hidden="true"
+                  className={`bus-timetable__dot bus-timetable__dot--${state}`}
+                />
+                <span className="bus-timetable__time">{time}</span>
+                {fixed && <span className="bus-timetable__state">{label}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
         <section
           id={`${id}-notice`}
           aria-labelledby={`${id}-notice-title`}
@@ -61,7 +69,11 @@ export function BusTimetable({ fixed }: ExamplePageProps) {
             cambios antes de salir.
           </p>
         </section>
-        <section id={`${id}-tickets`} aria-labelledby={`${id}-tickets-title`}>
+        <section
+          id={`${id}-tickets`}
+          aria-labelledby={`${id}-tickets-title`}
+          className="bus-timetable__tickets"
+        >
           <h2 id={`${id}-tickets-title`}>Billetes</h2>
           <p>Billete sencillo: 1,40 €. Con tarjeta de transporte: 0,85 €.</p>
           <a className="bus-timetable__buy" href={`#${id}-tickets`}>

@@ -1,41 +1,62 @@
-/* Biblioteca municipal con el lenguaje visual de weAAAre. */
+/* Biblioteca Municipal: catálogo y cuenta de socio. Berenjena, papel y lomos de color. */
 .library-login {
-  --page-accent: var(--color-surface);
-  --page-tint: var(--color-paper);
+  --plum: #3b1d5e;
+  --plum-deep: #2a1442;
+  --violet: #5b21b6;
+  --focus: #6d28d9;
+  --lavender: #efe8f7;
+  --paper: #faf7f2;
+  --paper-warm: #f4efe6;
+  --ink: #231d2b;
+  --ink-soft: #5e5468;
+  --line: #e4dcd0;
+  --field-line: #8b8296;
+  --mustard: #e2b13c;
+  --teal: #2f7f7a;
+  --coral: #d9644a;
+  --navy: #26406b;
 
   min-block-size: 100vh;
-  background: var(--page-tint);
-  color: var(--color-ink);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.6;
 }
 
 .library-login a {
-  color: var(--color-ink);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
+  color: var(--violet);
+  font-weight: 700;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
 }
 
 .library-login a:hover {
-  background: var(--color-accent);
+  color: var(--plum);
+  text-decoration-thickness: 2px;
 }
 
-/* Foco de weAAAre: anillo ámbar de 3 px separado 4 px. */
+/* Arreglo: anillo violeta de 3 px separado 3 px del elemento. */
 .library-login :focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-offset);
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
 }
 
-/* Barrera deliberada: se elimina el indicador de foco sin sustituto. */
-.library-login--no-focus *:focus,
-.library-login--no-focus *:focus-visible {
-  outline: none;
+/* En la cabecera morada, el anillo se dibuja en mostaza claro (8,70:1). */
+.library-login__header :focus-visible {
+  outline-color: #f5c84c;
 }
 
 /* Arreglo: el desplazamiento por foco deja sitio a la cabecera fija. */
 html.library-login-scroll-padding {
   scroll-padding-block-start: 6rem;
+}
+
+/* En pantallas estrechas la cabecera ocupa dos líneas: se reserva más altura. */
+@media (max-width: 40rem) {
+  html.library-login-scroll-padding {
+    scroll-padding-block-start: 8rem;
+  }
 }
 
 .library-login__header {
@@ -46,139 +67,389 @@ html.library-login-scroll-padding {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem 2rem;
   min-block-size: 5rem;
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-end: var(--border);
-  background: var(--page-accent);
-}
-
-/* En la cabecera, el anillo de foco se dibuja en tinta. */
-.library-login__header :focus-visible {
-  outline-color: var(--color-ink);
+  padding: 0.85rem clamp(1rem, 5vw, 4rem);
+  background: var(--plum);
+  box-shadow: 0 6px 20px rgb(42 20 66 / 0.18);
+  color: #fff;
 }
 
 .library-login__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Marca: tres lomos de libro, el último inclinado. */
+.library-login__logo {
+  flex: none;
+  inline-size: 2rem;
+  block-size: 1.9rem;
+  background:
+    linear-gradient(var(--mustard), var(--mustard)) 0 100% / 0.45rem 100%
+    no-repeat,
+    linear-gradient(#fff, #fff) 0.6rem 100% / 0.45rem 80% no-repeat;
+}
+
+.library-login__logo::after {
+  content: "";
+  display: block;
+  inline-size: 0.45rem;
+  block-size: 1.6rem;
+  margin-inline-start: 1.35rem;
+  margin-block-start: 0.3rem;
+  border-radius: 0.1rem;
+  background: #c9b6ec;
+  transform: rotate(14deg);
+  transform-origin: 0 100%;
 }
 
 .library-login__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 0.25rem 1.75rem;
+}
+
+.library-login .library-login__nav a {
+  color: #fff;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.library-login .library-login__nav a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .library-login__main {
-  max-inline-size: 40rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 4rem);
+  max-inline-size: 76rem;
   margin-inline: auto;
-  padding: 2.5rem clamp(1rem, 4vw, 3rem);
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 5vw, 4rem) 4rem;
 }
 
+@media (min-width: 64rem) {
+  .library-login__main {
+    grid-template-columns: minmax(0, 2fr) minmax(17rem, 1fr);
+    align-items: start;
+  }
+
+  .library-login__card {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tarjeta de acceso: bienvenida tintada a la izquierda, formulario a la derecha. */
 .library-login__card {
-  padding: 1.5rem;
-  border: var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgb(35 29 43 / 0.06),
+    0 12px 32px rgb(59 29 94 / 0.08);
+}
+
+.library-login__card > * {
+  margin: 0;
+  padding-inline: clamp(1.25rem, 4vw, 2.75rem);
 }
 
 .library-login h1 {
+  padding-block-start: clamp(1.75rem, 4vw, 2.75rem);
+  background: var(--lavender);
   font-family: var(--font-display);
   font-variation-settings: var(--font-display-settings);
+  font-size: clamp(2.125rem, 1.6rem + 1.8vw, 3rem);
   font-weight: 500;
+  line-height: 1.08;
 }
 
-.library-login h2 {
-  font-family: var(--font-body);
-  font-weight: 700;
+.library-login__intro {
+  padding-block: 0.75rem 0.5rem;
+  background: var(--lavender);
+  color: var(--ink-soft);
+  font-size: 1.1875rem;
 }
 
-.library-login h1 {
-  margin-block-start: 0;
-  font-size: 2.1875rem;
-  line-height: 1.12;
+/* Estante decorativo con lomos de colores. */
+.library-login__shelf {
+  display: block;
+  min-block-size: 5.5rem;
+  padding-block-end: 1.75rem;
+  background:
+    linear-gradient(var(--plum), var(--plum)) bottom 1.75rem left
+    clamp(1.25rem, 4vw, 2.75rem) / 15rem 0.35rem no-repeat,
+    linear-gradient(var(--mustard), var(--mustard)) bottom 2.1rem left
+    calc(clamp(1.25rem, 4vw, 2.75rem) + 0.5rem) / 1.1rem 3.4rem no-repeat,
+    linear-gradient(var(--teal), var(--teal)) bottom 2.1rem left
+    calc(clamp(1.25rem, 4vw, 2.75rem) + 1.8rem) / 1.4rem 2.9rem no-repeat,
+    linear-gradient(var(--coral), var(--coral)) bottom 2.1rem left
+    calc(clamp(1.25rem, 4vw, 2.75rem) + 3.4rem) / 0.9rem 3.7rem no-repeat,
+    linear-gradient(var(--navy), var(--navy)) bottom 2.1rem left
+    calc(clamp(1.25rem, 4vw, 2.75rem) + 4.5rem) / 1.3rem 3.1rem no-repeat,
+    linear-gradient(var(--violet), var(--violet)) bottom 2.1rem left
+    calc(clamp(1.25rem, 4vw, 2.75rem) + 6rem) / 1rem 2.6rem no-repeat,
+    var(--lavender);
 }
 
 .library-login__form {
   display: grid;
-  gap: 1rem;
+  gap: 1.1rem;
+  padding-block-start: 2rem;
+}
+
+@media (min-width: 52rem) {
+  .library-login__card {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-rows: auto 1fr auto auto;
+    /* La columna de bienvenida ocupa el 45 %: el tinte la cubre entera. */
+    background: linear-gradient(90deg, var(--lavender) 45%, #fff 45%);
+  }
+
+  .library-login h1,
+  .library-login__intro,
+  .library-login__shelf {
+    grid-column: 1;
+    background-color: transparent;
+  }
+
+  .library-login h1 {
+    grid-row: 1;
+  }
+
+  .library-login__intro {
+    grid-row: 2;
+    align-self: start;
+  }
+
+  .library-login__shelf {
+    grid-row: 3 / span 2;
+  }
+
+  .library-login__form {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    padding-block-start: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  .library-login__result {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .library-login__links {
+    grid-column: 2;
+    grid-row: 4;
+  }
 }
 
 .library-login__field {
   display: grid;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .library-login__field label {
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .library-login__field input {
   min-inline-size: 0;
-  padding: 0.5rem 0.75rem;
-  border: var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
+  min-block-size: 3rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--field-line);
+  border-radius: 0.6rem;
+  background: #fff;
+  color: var(--ink);
 }
 
 .library-login__check {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  font-size: 1rem;
 }
 
 .library-login__check input {
-  inline-size: 1.5rem;
-  block-size: 1.5rem;
+  inline-size: 1.35rem;
+  block-size: 1.35rem;
   margin: 0;
-  accent-color: var(--color-ink);
+  accent-color: var(--violet);
 }
 
 .library-login__submit {
   justify-self: start;
-  padding: 0.625rem 1.5rem;
-  border: var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-ink);
-  box-shadow:
-    0 4px 0 0 var(--page-accent),
-    0 4px 0 2px var(--color-ink);
-  color: var(--color-paper);
+  min-inline-size: 10rem;
+  min-block-size: 3rem;
+  padding: 0.6rem 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--plum);
+  color: #fff;
   font-weight: 700;
   cursor: pointer;
 }
 
 .library-login__submit:hover {
-  transform: translateY(2px);
-  box-shadow:
-    0 2px 0 0 var(--page-accent),
-    0 2px 0 2px var(--color-ink);
+  background: var(--violet);
 }
 
 .library-login__result {
   min-block-size: 1.6em;
+  padding-block-start: 0.75rem;
+  color: #2f6b3a;
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .library-login__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-block-end: 0;
+  gap: 0.5rem 1.75rem;
+  padding-block: 0.5rem clamp(1.75rem, 4vw, 2.75rem);
+  font-size: 1rem;
 }
 
+.library-login h2 {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-variation-settings: var(--font-display-settings);
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+/* Novedades: una fila por libro, con su portada dibujada con CSS. */
 .library-login__books {
   display: grid;
-  gap: 0.75rem;
-  padding-inline-start: 1.25rem;
+  margin: 0;
+  padding: 0;
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(35 29 43 / 0.06);
+  list-style: none;
+}
+
+.library-login__books li + li {
+  border-block-start: 1px solid var(--line);
+}
+
+.library-login .library-login__books a {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.75rem;
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.library-login .library-login__books a:hover {
+  color: var(--violet);
+  text-decoration: underline;
+}
+
+/* La flecha indica que la fila lleva a la ficha del libro. */
+.library-login__books a::after {
+  content: "";
+  flex: none;
+  inline-size: 0.55rem;
+  block-size: 0.55rem;
+  margin-inline: auto 0.25rem;
+  border-block-start: 2px solid currentcolor;
+  border-inline-end: 2px solid currentcolor;
+  rotate: 45deg;
+}
+
+.library-login__books a::before {
+  content: "";
+  flex: none;
+  inline-size: 3.25rem;
+  aspect-ratio: 3 / 4;
+  border-radius: 0.15rem 0.4rem 0.4rem 0.15rem;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 0.18) 0 0.25rem, transparent 0.25rem),
+    linear-gradient(
+      transparent 62%,
+      rgb(255 255 255 / 0.85) 62% 66%,
+      transparent 66%
+    ),
+    var(--cover, var(--plum));
+  box-shadow:
+    0 1px 2px rgb(35 29 43 / 0.14),
+    0 4px 10px rgb(35 29 43 / 0.1);
+}
+
+.library-login__books li:nth-child(2) a {
+  --cover: var(--mustard);
+}
+
+.library-login__books li:nth-child(3) a {
+  --cover: var(--teal);
+}
+
+.library-login__books li:nth-child(4) a {
+  --cover: var(--coral);
+}
+
+.library-login__books li:nth-child(5) a {
+  --cover: var(--navy);
+}
+
+.library-login__books li:nth-child(6) a {
+  --cover: var(--violet);
+}
+
+.library-login__hours {
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--paper-warm);
+}
+
+.library-login__hours p {
+  margin-block: 0 1rem;
+}
+
+.library-login__hours p:first-of-type {
+  font-weight: 700;
+}
+
+.library-login__hours p:last-child {
+  margin-block-end: 0;
+  color: var(--ink-soft);
 }
 
 .library-login__footer {
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  border-block-start: var(--border);
-  color: var(--color-ink-soft);
-  font-size: 0.875rem;
+  padding: 1.75rem clamp(1rem, 5vw, 4rem);
+  background: var(--plum-deep);
+  color: #d9cdea;
+  font-size: 0.9375rem;
   text-align: center;
+}
+
+.library-login__footer p {
+  margin: 0;
+}
+
+/*
+ * Barrera deliberada: se elimina el indicador de foco sin sustituto. Va al
+ * final y con la misma especificidad que el anillo, así que siempre gana.
+ */
+.library-login--no-focus *:focus,
+.library-login--no-focus *:focus-visible {
+  outline: none;
 }

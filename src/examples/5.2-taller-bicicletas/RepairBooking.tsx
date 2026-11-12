@@ -14,7 +14,10 @@ export function RepairBooking({ fixed }: ExamplePageProps) {
   return (
     <div className="repair-booking">
       <header className="repair-booking__header">
-        <p className="repair-booking__brand">Taller La Cadena</p>
+        <p className="repair-booking__brand">
+          <span aria-hidden="true" className="repair-booking__logo" />
+          Taller La Cadena
+        </p>
         <nav aria-label="Principal" className="repair-booking__nav">
           <a href={`#${id}-services`}>Servicios</a>
           <a href={`#${id}-booking`}>Pedir cita</a>
@@ -22,10 +25,15 @@ export function RepairBooking({ fixed }: ExamplePageProps) {
       </header>
       <main className="repair-booking__main">
         <h1>Pide cita para tu bicicleta</h1>
-        <p>
+        <p className="repair-booking__intro">
           Te llamamos en el día para confirmar la hora. La revisión básica
           cuesta 25 €.
         </p>
+        <ul className="repair-booking__facts">
+          <li>Casi todas las reparaciones, listas en 24 horas.</li>
+          <li>Presupuesto antes de tocar nada.</li>
+          <li>De lunes a sábado, en la calle del Puerto 8.</li>
+        </ul>
         <form
           id={`${id}-booking`}
           className="repair-booking__form"
@@ -60,7 +68,11 @@ export function RepairBooking({ fixed }: ExamplePageProps) {
         <p className="repair-booking__result" role="status">
           {sent ? 'Solicitud de prueba: no se ha enviado ningún dato.' : ''}
         </p>
-        <section id={`${id}-services`} aria-labelledby={`${id}-services-title`}>
+        <section
+          id={`${id}-services`}
+          aria-labelledby={`${id}-services-title`}
+          className="repair-booking__services"
+        >
           <h2 id={`${id}-services-title`}>Servicios</h2>
           <ul>
             <li>Revisión básica: frenos, cambios y presión.</li>

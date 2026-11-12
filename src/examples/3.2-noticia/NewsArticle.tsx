@@ -19,7 +19,13 @@ export function NewsArticle({ fixed }: ExamplePageProps) {
   return (
     <div className="news-article">
       <header className="news-article__header">
-        <p className="news-article__brand">Diario de Barrio</p>
+        <p className="news-article__edition">
+          Edición del centro · Información de proximidad desde 2009
+        </p>
+        <p className="news-article__brand">
+          <span aria-hidden="true" className="news-article__logo" />
+          Diario de Barrio
+        </p>
         <nav aria-label="Secciones" className="news-article__nav">
           <a href={`#${id}-article`}>Movilidad</a>
           <a href={`#${id}-article`}>Cultura</a>
@@ -31,9 +37,10 @@ export function NewsArticle({ fixed }: ExamplePageProps) {
           <p className="news-article__kicker">Movilidad</p>
           <h1>El carril bici del centro duplica sus viajes en un año</h1>
           <p className="news-article__byline">
+            <span aria-hidden="true" className="news-article__avatar" />
             Redacción · 8 de noviembre de 2026
           </p>
-          <p>
+          <p className="news-article__lead">
             El ayuntamiento ha publicado los primeros datos de uso del carril
             bici que conecta la estación con la plaza Mayor. Los contadores
             registran más del doble de viajes diarios que hace un año.
